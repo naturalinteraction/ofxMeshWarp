@@ -6,8 +6,9 @@ using namespace std;
 void ofApp::setup(){
 	ofLoadImage(tex_, "of.png");
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(4,4,512,512);
+	mesh_->setup(ofRectangle(0, 0, 1024, 1024), 16, 16);
 	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
+	printf("%f %f\n", tex_.getWidth(), tex_.getHeight());
 	controller_.add(mesh_);
 	controller_.enable();
 }

@@ -102,3 +102,7 @@ Desktop.ini
 #########################
 
 .mailmap
+
+example/bin/example
+example/bin/libfmodex.so
+example/bin/data/hoge.txt

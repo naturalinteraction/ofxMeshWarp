@@ -26,4 +26,5 @@ private:
 	std::shared_ptr<ofxMeshWarp> mesh_;
 	ofxMeshWarpController controller_;
 	ofTexture tex_;
+	bool show_controller_interface = true;
 };

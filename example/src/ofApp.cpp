@@ -4,7 +4,7 @@ using namespace std;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofLoadImage(tex_, "crop2.png");
+	ofLoadImage(tex_, "crop2hc.png");
 	mesh_ = make_shared<ofxMeshWarp>();
 	mesh_->setup(ofRectangle(30, 30, 1845, 919), 4, 4);
 	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
@@ -26,12 +26,18 @@ void ofApp::draw(){
 //	mesh_->drawMesh();
 	controller_.drawFace();
 	tex_.unbind();
-	controller_.draw();
+	if (show_controller_interface)
+		controller_.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	switch(key) {
+		case 'm':
+		{
+			show_controller_interface = ! show_controller_interface;
+			break;
+		}
 		case 'S': {
 			ofxMeshWarpSave saver;
 			saver.addMesh(mesh_);

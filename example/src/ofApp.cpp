@@ -32,14 +32,14 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	switch(key) {
-		case 's': {
+		case 'S': {
 			ofxMeshWarpSave saver;
 			saver.addMesh(mesh_);
-			saver.save("hoge.txt");
+			saver.save("transformation.txt");
 		}	break;
-		case 'l': {
+		case 'L': {
 			ofxMeshWarpLoad loader;
-			vector<shared_ptr<ofxMeshWarp>> result = loader.load("hoge.txt");
+			vector<shared_ptr<ofxMeshWarp>> result = loader.load("transformation.txt");
 			if(!result.empty()) {
 				controller_.clear();
 				mesh_ = result[0];

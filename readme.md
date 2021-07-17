@@ -32,7 +32,7 @@ So if you call divide/reduce many times, you may need to call `ofxMeshWarp::gc()
 
 
 ### Save/Load
-`s` and `l` keys.
+`S` and `L` keys.
 
 ## License
 MIT license.

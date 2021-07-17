@@ -301,6 +301,12 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 		}
 		mouse_op_.hover = getHit(mouse_op_.pos);
 	}
+
+	if(args.key == ' ') {
+		for(auto &p : selected_) {
+			p -> setNodal(! p -> isNode());
+		}
+	}
 }
 void PointController::keyReleased(ofKeyEventArgs &args)
 {

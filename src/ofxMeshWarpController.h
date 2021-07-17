@@ -160,7 +160,7 @@ namespace Editor {
 			bool isLineY() const { return isLine() && !isLineX(); }
 		} hit_info_;
 		
-		virtual bool isDivide() const { return !ofGetKeyPressed(OF_KEY_ALT); }
+		virtual bool isDivide() const { return (!ofGetKeyPressed(OF_KEY_ALT)) && ofGetKeyPressed(OF_KEY_CONTROL); }
 		virtual bool isReduce() const { return ofGetKeyPressed(OF_KEY_ALT); }
 		HitInfo getHitInfo(const glm::vec2 &test) const;
 	};

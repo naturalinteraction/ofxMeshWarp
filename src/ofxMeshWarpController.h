@@ -123,8 +123,8 @@ namespace Editor {
 		bool isMakingRect() const { return mouse_op_.pressed_state==MouseOperation::STATE_MAKING_RECT; }
 		virtual bool isToggleNode() const { return ofGetKeyPressed(OF_KEY_ALT); }
 		virtual bool isSlide() const { return ofGetKeyPressed(OF_KEY_SHIFT); }
-		virtual bool isAdditive() const { return ofGetKeyPressed(OF_KEY_SHIFT); }
-		virtual bool isAlternative() const { return ofGetKeyPressed(OF_KEY_COMMAND); }
+		virtual bool isAdditive() const { return false; }
+		virtual bool isAlternative() const { return false; }
 		virtual bool isArrowKeyJump() const { return ofGetKeyPressed(OF_KEY_SHIFT); }
 		virtual bool isEditCoord() const { return ofGetKeyPressed(OF_KEY_ALT); }
 		virtual bool isEditVertex() const { return !ofGetKeyPressed(OF_KEY_ALT); }

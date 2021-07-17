@@ -8,17 +8,13 @@ See example
 
 ### selecting points
 You can select/deselect point(s) by clicking on the point or making rectangle including the points.  
-With shift key pressed, additive. (???)
-With command key pressed, alternative. (???)
 
 ### moving points
 You can move points' position by dragging on a selected point.  
 With ALT key pressed, texcoord will be moved instead.  
-With shift key pressed, points move according axis.  
-You can also move by arrow keys.
 
 ### editing alpha
-You can edit points' alpha by scrolling Y-axis. (???)
+You can edit selected points' alpha by mouse scrolling.
 
 ### switching nodal or not
 Each point has a property of nodal or not.  

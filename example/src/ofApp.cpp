@@ -6,7 +6,7 @@ using namespace std;
 void ofApp::setup(){
 	ofLoadImage(tex_, "mattonella.jpg");
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(0, 0, 1024, 1024), 8, 8);
+	mesh_->setup(ofRectangle(30, 30, 1024, 1024), 8, 8);
 	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
 	printf("%f %f\n", tex_.getWidth(), tex_.getHeight());
 	controller_.add(mesh_);

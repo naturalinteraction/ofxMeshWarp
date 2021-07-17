@@ -4,9 +4,9 @@ using namespace std;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofLoadImage(tex_, "of.png");
+	ofLoadImage(tex_, "mattonella.jpg");
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(0, 0, 1024, 1024), 16, 16);
+	mesh_->setup(ofRectangle(0, 0, 1024, 1024), 8, 8);
 	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
 	printf("%f %f\n", tex_.getWidth(), tex_.getHeight());
 	controller_.add(mesh_);
@@ -14,7 +14,8 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update()
+{
 	ofSetWindowTitle(ofToString(ofGetFrameRate(),2));
 	mesh_->update();
 }

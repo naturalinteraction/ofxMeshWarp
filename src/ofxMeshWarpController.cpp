@@ -24,7 +24,7 @@ void ControllerBase::enable()
 }
 void ControllerBase::disable()
 {
-	if(is_enabled_) {
+	if(is_enabled_){
 		ofUnregisterMouseEvents(this);
 		ofUnregisterKeyEvents(this);
 		is_enabled_ = false;

@@ -50,7 +50,7 @@ void Mesh::divideCol(int pos, float ratio)
 		MeshPoint &a = mesh_[getIndex(pos,y)];
 		MeshPoint &b = mesh_[getIndex(pos+1,y)];
 		MeshPoint point = MeshPoint(MeshPoint::getLerped(a, b, ratio));
-		point.setNodal(false);
+		// point.setNodal(false);
 		it = indices.insert(it, mesh_.size());
 		mesh_.push_back(point);
 		if(y < div_y_-1) {
@@ -74,7 +74,7 @@ void Mesh::divideRow(int pos, float ratio)
 		MeshPoint &a = mesh_[getIndex(x,pos)];
 		MeshPoint &b = mesh_[getIndex(x,pos+1)];
 		MeshPoint point = MeshPoint(MeshPoint::getLerped(a, b, ratio));
-		point.setNodal(false);
+		// point.setNodal(false);
 		it = indices.insert(it, (ofIndexType)mesh_.size())+1;
 		mesh_.push_back(point);
 	}

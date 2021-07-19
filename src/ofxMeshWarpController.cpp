@@ -79,7 +79,7 @@ void PointController::drawCustom() const
 		ofDrawCircle(p->point(), size/scale_);
 	};
 	ofPushStyle();
-	ofSetColor(ofColor::green);
+	ofSetColor(0,255,0,60);
 	ofNoFill();
 	for(auto &mesh : meshes_) {
 		auto points = mesh->getPoints();
@@ -87,7 +87,7 @@ void PointController::drawCustom() const
 			drawCircle(p);
 		}
 	}
-	ofSetColor(ofColor::green);
+	ofSetColor(0,255,0,60);
 	ofFill();
 	if(mouse_op_.hover) {
 		drawCircle(mouse_op_.hover, 2);
@@ -95,7 +95,7 @@ void PointController::drawCustom() const
 	for(auto &p : mouse_op_.inside_rect) {
 		drawCircle(p, 2);
 	}
-	ofSetColor(ofColor::red);
+	ofSetColor(255,0,0,60);
 	ofFill();
 	for(auto &p : selected_) {
 		drawCircle(p);
@@ -105,7 +105,7 @@ void PointController::drawCustom() const
 	}
 	if(isMakingRect()) {
 		ofFill();
-		ofSetColor(ofColor::white, 128);
+		ofSetColor(0,0,255,60);
 		ofDrawRectangle(ofRectangle(mouse_op_.pressed_pos, mouse_op_.pos));
 	}
 	ofPopStyle();
@@ -332,7 +332,7 @@ void DivideController::drawCustom() const
 				const auto &points0 = MeshHelper(hit_info_.mesh).getColPoints(hit_info_.line_index_0);
 				const auto &points1 = MeshHelper(hit_info_.mesh).getColPoints(hit_info_.line_index_1);
 				assert(points0.size() == points1.size());
-				ofSetColor(ofColor::green);
+				ofSetColor(0,255,0,60);
 				for(size_t i = 0, num = points0.size(); i < num; ++i) {
 					glm::vec3 p = glm::mix(points0[i]->point(), points1[i]->point(), hit_info_.pos_intersection);
 					mesh.addVertex(p);
@@ -343,7 +343,7 @@ void DivideController::drawCustom() const
 				const auto &points0 = MeshHelper(hit_info_.mesh).getRowPoints(hit_info_.line_index_0);
 				const auto &points1 = MeshHelper(hit_info_.mesh).getRowPoints(hit_info_.line_index_1);
 				assert(points0.size() == points1.size());
-				ofSetColor(ofColor::green);
+				ofSetColor(0,255,0,60);
 				for(size_t i = 0, num = points0.size(); i < num; ++i) {
 					glm::vec3 p = glm::mix(points0[i]->point(), points1[i]->point(), hit_info_.pos_intersection);
 					mesh.addVertex(p);
@@ -353,14 +353,14 @@ void DivideController::drawCustom() const
 		if(isReduce()) {
 			if(hit_info_.isLineX()) {
 				const auto &points = MeshHelper(hit_info_.mesh).getRowPoints(hit_info_.line_index_0);
-				ofSetColor(ofColor::red);
+				ofSetColor(255,0,0,60);
 				for(auto &p : points) {
 					mesh.addVertex(p->point());
 				}
 			}
 			if(hit_info_.isLineY()) {
 				const auto &points = MeshHelper(hit_info_.mesh).getColPoints(hit_info_.line_index_0);
-				ofSetColor(ofColor::red);
+				ofSetColor(255,0,0,60);
 				for(auto &p : points) {
 					mesh.addVertex(p->point());
 				}

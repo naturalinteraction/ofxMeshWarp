@@ -4,9 +4,9 @@ using namespace std;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofLoadImage(tex_, "crop2hc.png");
+	ofLoadImage(tex_, "tondo_crop_square.jpg");
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(30, 30, 1845, 919), 64, 32);
+	mesh_->setup(ofRectangle(30, 30, 580, 580), 32, 32);
 	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
 	printf("%f %f\n", tex_.getWidth(), tex_.getHeight());
 	controller_.add(mesh_);

@@ -6,7 +6,7 @@ using namespace std;
 void ofApp::setup(){
 	ofLoadImage(tex_, "crop2hc.png");
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(30, 30, 1845, 919), 4, 4);
+	mesh_->setup(ofRectangle(30, 30, 1845, 919), 64, 48);
 	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
 	printf("%f %f\n", tex_.getWidth(), tex_.getHeight());
 	controller_.add(mesh_);

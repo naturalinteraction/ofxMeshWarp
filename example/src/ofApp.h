@@ -28,4 +28,7 @@ private:
 	ofTexture tex_;
 	ofPixels pix_;
 	bool show_controller_interface = true;
+
+	float drama = 0.001;
+	float my_scale = 0.00;
 };

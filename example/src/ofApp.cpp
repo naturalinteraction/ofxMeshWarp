@@ -12,7 +12,7 @@ void ofApp::setup()
 	float ph = tex_.getHeight();
 
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), 32, 32);
+	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), 64, 64);
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
@@ -39,6 +39,34 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+
+	if(key == 'w')
+	{
+		my_scale -= 0.01;
+		printf("scale %f\n", my_scale);
+	}
+	if(key == 's')
+	{
+		my_scale += 0.01;
+		printf("my_scale %f\n", my_scale);
+	}
+
+	if(key == 'a')
+	{
+		drama -= 0.0001;
+		printf("drama %f\n", drama);
+	}
+	if(key == 'd')
+	{
+		drama += 0.0001;
+		printf("drama %f\n", drama);
+	}
+
+	if (key == 'p')
+	{
+		controller_.elevationWarp(my_scale, drama);
+	}
+
 	switch(key) {
 		case 'm':
 		{

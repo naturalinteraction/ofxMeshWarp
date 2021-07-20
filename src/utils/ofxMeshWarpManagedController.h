@@ -14,6 +14,7 @@ namespace Editor {
 		void setUVResolution(const glm::vec2 &res) { mover_.setUVResolution(res); }
 
 		void setPixels(ofPixels &pix) { mover_.setPixels(pix); }
+		void elevationWarp(float my_scale, float drama) { mover_.elevationWarp(my_scale, drama); }
 
 		void setAnchorPoint(float x, float y);
 		void setTranslation(float x, float y);

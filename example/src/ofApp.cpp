@@ -37,33 +37,47 @@ void ofApp::draw(){
 		controller_.draw();
 }
 
+void ofApp::loadDaMesh()
+{
+	ofxMeshWarpLoad loader;
+	vector<shared_ptr<ofxMeshWarp>> result = loader.load("transformation.txt");
+	if(!result.empty()) {
+		controller_.clear();
+		mesh_ = result[0];
+		controller_.add(mesh_);
+	}
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
 	if(key == 'w')
 	{
 		my_scale -= 0.01;
-		printf("scale %f\n", my_scale);
+		printf("my_scale %f\n", my_scale);
+		loadDaMesh();
+		controller_.elevationWarp(my_scale, drama);
 	}
 	if(key == 's')
 	{
 		my_scale += 0.01;
 		printf("my_scale %f\n", my_scale);
+		loadDaMesh();
+		controller_.elevationWarp(my_scale, drama);
 	}
 
 	if(key == 'a')
 	{
 		drama -= 0.0001;
 		printf("drama %f\n", drama);
+		loadDaMesh();
+		controller_.elevationWarp(my_scale, drama);
 	}
 	if(key == 'd')
 	{
 		drama += 0.0001;
 		printf("drama %f\n", drama);
-	}
-
-	if (key == 'p')
-	{
+		loadDaMesh();
 		controller_.elevationWarp(my_scale, drama);
 	}
 
@@ -79,13 +93,7 @@ void ofApp::keyPressed(int key){
 			saver.save("transformation.txt");
 		}	break;
 		case 'L': {
-			ofxMeshWarpLoad loader;
-			vector<shared_ptr<ofxMeshWarp>> result = loader.load("transformation.txt");
-			if(!result.empty()) {
-				controller_.clear();
-				mesh_ = result[0];
-				controller_.add(mesh_);
-			}
+			loadDaMesh();
 		}	break;
 	}
 }

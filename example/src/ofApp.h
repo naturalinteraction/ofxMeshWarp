@@ -22,6 +22,9 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+
+	void loadDaMesh();
+
 private:
 	std::shared_ptr<ofxMeshWarp> mesh_;
 	ofxMeshWarpController controller_;
@@ -29,6 +32,6 @@ private:
 	ofPixels pix_;
 	bool show_controller_interface = true;
 
-	float drama = 0.001;
-	float my_scale = 0.00;
+	float drama = 0.0;
+	float my_scale = 0.0;
 };

@@ -49,6 +49,12 @@ void ControllerBase::draw() const
 	for(auto &mesh : meshes_) {
 		mesh->drawWireframe();
 	}
+	ofSetColor(ofColor(0,0,255));
+	// printf("%f %f\n", center_of_projection.x, center_of_projection.y);
+	ofDrawCircle(center_of_projection.x * 1000.0 / 580.0 + 1920/2 - 500,
+		         center_of_projection.y * 1000.0 / 580.0 + 1080/2 - 500,
+		         16);
+	ofSetColor(ofColor(255));
 	drawCustom();
 	ofPopMatrix();
 }
@@ -333,12 +339,8 @@ void PointController::elevationWarp(float my_scale, float drama)
 			int iby = b.y;
 			float elevation = /*255 - */pixels[3 * (iby * 580 + ibx)];
 
-			printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
-
-			glm::vec2 center_of_projection;
-			center_of_projection.x =580/2;
-			center_of_projection.y =580/2;  // center of screen
-			// center_of_projection.y =580;  // bottom of screen
+			// printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
+			// printf("x%f y%f\n", center_of_projection.x, center_of_projection.y);
 
 			glm::vec2 delta = glm::vec2((b.x - center_of_projection.x) * (my_scale + elevation * drama), (b.y - center_of_projection.y) * (my_scale + elevation * drama)) / scale_;
 			PointHelper(p).moveVertex(delta);
@@ -346,9 +348,9 @@ void PointController::elevationWarp(float my_scale, float drama)
 			count++;
 		}
 	}
-	printf("anchor %f %f\n", anchor_point_.x, anchor_point_.y);
-	printf("scale %f\n", scale_);
-	printf("translation %f %f\n", translation_.x, translation_.y);
+	// printf("anchor %f %f\n", anchor_point_.x, anchor_point_.y);
+	// printf("scale %f\n", scale_);
+	// printf("translation %f %f\n", translation_.x, translation_.y);
 	for(auto &m : meshes_)
 	{
 		m->setDirty();

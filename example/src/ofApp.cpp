@@ -18,6 +18,7 @@ void ofApp::setup()
 	controller_.add(mesh_);
 	controller_.enable();
 	controller_.setPixels(pix_);
+	controller_.setCenterOfProjection(580/2, 580/2);
 }
 
 //--------------------------------------------------------------
@@ -50,6 +51,22 @@ void ofApp::loadDaMesh()
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+
+	if(key == 'q')
+	{
+		controller_.setCenterOfProjection(controller_.center_of_projection.x, controller_.center_of_projection.y - 10);
+		printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
+		loadDaMesh();
+		controller_.elevationWarp(my_scale, drama);
+	}
+
+	if(key == 'z')
+	{
+		controller_.setCenterOfProjection(controller_.center_of_projection.x, controller_.center_of_projection.y + 10);
+		printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
+		loadDaMesh();
+		controller_.elevationWarp(my_scale, drama);
+	}
 
 	if(key == 'w')
 	{

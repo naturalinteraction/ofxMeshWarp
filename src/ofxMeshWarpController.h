@@ -60,6 +60,8 @@ namespace Editor {
 		void setTranslation(const glm::vec2 &point) { translation_ = point; }
 		void setScale(float s) { assert(s>0); scale_ = s; }
 
+		glm::vec2 center_of_projection;
+
 		virtual bool isEditing() const { return false; }
 		
 		virtual void clearOperation(){};

@@ -122,6 +122,7 @@ namespace Editor {
 		float scroll_to_alpha_ = -1/100.f;
 		
 		ofPixels pixels;
+		float drama = 0.001;
 
 		bool isGrabbing() const { return mouse_op_.pressed_state==MouseOperation::STATE_GRABBING; }
 		bool isMakingRect() const { return mouse_op_.pressed_state==MouseOperation::STATE_MAKING_RECT; }

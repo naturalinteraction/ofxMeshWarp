@@ -3,7 +3,8 @@
 using namespace std;
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup()
+{
 	ofLoadImage(tex_, "tondo_crop_square.jpg");
 	tex_.readToPixels(pix_);
 

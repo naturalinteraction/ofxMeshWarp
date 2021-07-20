@@ -315,6 +315,11 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 		}
 	}
 
+	if(args.key == 'a')
+		drama -= 0.0001;
+	if(args.key == 'd')
+		drama += 0.0001;
+
 	if(args.key == 'p')
 	{
 		for(auto &mesh : meshes_) {
@@ -326,15 +331,34 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 				b.x = p->point().x;
 				b.y = p->point().y;
 				b = screenToLocal(b);
-				printf("count=%d x%f y%f\n", count, b.x -1920/2, b.y - 1080/2);
+				b.x = (b.x -1920/2 + 500) * 579.0 / 1000.0;  // image is 580x580 and 1000x1000 on screen
+				b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;
+				int ibx = b.x;
+				int iby = b.y;
+				float elevation = pixels[3 * (iby * 580 + ibx)];
+
+				printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
+
+				glm::vec2 center_of_projection;
+				center_of_projection.x =580/2;
+				center_of_projection.y =580/2;
+
+				glm::vec2 delta = glm::vec2((b.x - center_of_projection.x) * elevation * drama, (b.y - center_of_projection.y) * elevation * drama) / scale_;
+				PointHelper(p).moveVertex(delta);
+
 				count++;
 			}
 		}
 		printf("anchor %f %f\n", anchor_point_.x, anchor_point_.y);
 		printf("scale %f\n", scale_);
 		printf("translation %f %f\n", translation_.x, translation_.y);
+		for(auto &m : meshes_)
+		{
+			m->setDirty();
+		}
 	}
 }
+
 void PointController::keyReleased(ofKeyEventArgs &args)
 {
 }

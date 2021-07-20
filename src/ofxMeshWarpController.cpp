@@ -322,7 +322,7 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 	}
 }
 
-void PointController::elevationWarp(float my_scale, float drama)
+void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, float drama)
 {
 	for(auto &mesh : meshes_) {
 		auto points = mesh->getPoints();
@@ -342,7 +342,8 @@ void PointController::elevationWarp(float my_scale, float drama)
 			// printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
 			// printf("x%f y%f\n", center_of_projection.x, center_of_projection.y);
 
-			glm::vec2 delta = glm::vec2((b.x - center_of_projection.x) * (my_scale + elevation * drama), (b.y - center_of_projection.y) * (my_scale + elevation * drama)) / scale_;
+			glm::vec2 delta = glm::vec2((b.x + my_translation.x - center_of_projection.x) * (my_scale + elevation * drama), (b.y + my_translation.y - center_of_projection.y) * (my_scale + elevation * drama)) / scale_;
+
 			PointHelper(p).moveVertex(delta);
 
 			count++;

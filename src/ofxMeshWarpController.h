@@ -96,7 +96,7 @@ namespace Editor {
 
 		void setUVResolution(const glm::vec2 &res) { screen_to_coord_ = res; }
 		void setPixels(ofPixels &pix);
-		void elevationWarp(float my_scale, float drama);
+		void elevationWarp(glm::vec2 my_translation, float my_scale, float drama);
 
 		virtual void mousePressed(ofMouseEventArgs &args);
 		virtual void mouseReleased(ofMouseEventArgs &args);

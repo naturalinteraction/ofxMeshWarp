@@ -14,7 +14,7 @@ namespace Editor {
 		void setUVResolution(const glm::vec2 &res) { mover_.setUVResolution(res); }
 
 		void setPixels(ofPixels &pix) { mover_.setPixels(pix); }
-		void elevationWarp(float my_scale, float drama) { mover_.elevationWarp(my_scale, drama); }
+		void elevationWarp(glm::vec2 my_translation, float my_scale, float drama) { mover_.elevationWarp(my_translation, my_scale, drama); }
 		void setCenterOfProjection(float x, float y) { center_of_projection.x = x; center_of_projection.y = y; mover_.center_of_projection.x = x; mover_.center_of_projection.y = y; }
 
 		void setAnchorPoint(float x, float y);

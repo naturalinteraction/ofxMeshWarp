@@ -2,9 +2,10 @@
 Warping mesh points with mouse and keyboard.  
 You can do it by code, of course.
 
-## How to use
-### code
-See example
+### elevation warping
+`w,s` scale up/down
+`q,z` center of projection up/down
+`a,d` elevation multiplier up/down
 
 ### selecting points
 You can select/deselect point(s) by clicking on the point or making rectangle including the points.  

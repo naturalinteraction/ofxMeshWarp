@@ -123,6 +123,7 @@ namespace Editor {
 		
 		ofPixels pixels;
 		float drama = 0.001;
+		float my_scale = 0.01;
 
 		bool isGrabbing() const { return mouse_op_.pressed_state==MouseOperation::STATE_GRABBING; }
 		bool isMakingRect() const { return mouse_op_.pressed_state==MouseOperation::STATE_MAKING_RECT; }

@@ -315,10 +315,27 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 		}
 	}
 
+	if(args.key == 'w')
+	{
+		my_scale -= 0.01;
+		printf("scale %f\n", my_scale);
+	}
+	if(args.key == 's')
+	{
+		my_scale += 0.01;
+		printf("my_scale %f\n", my_scale);
+	}
+
 	if(args.key == 'a')
+	{
 		drama -= 0.0001;
+		printf("drama %f\n", drama);
+	}
 	if(args.key == 'd')
+	{
 		drama += 0.0001;
+		printf("drama %f\n", drama);
+	}
 
 	if(args.key == 'p')
 	{
@@ -335,7 +352,7 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 				b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;
 				int ibx = b.x;
 				int iby = b.y;
-				float elevation = pixels[3 * (iby * 580 + ibx)];
+				float elevation = /*255 - */pixels[3 * (iby * 580 + ibx)];
 
 				printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
 

@@ -5,10 +5,17 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofLoadImage(tex_, "tondo_crop_square.jpg");
+	tex_.readToPixels(pix_);
+
+	printf("pix size %ld\n", pix_.size());
+
+	float pw = tex_.getWidth();
+	float ph = tex_.getHeight();
+
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(30, 30, 580, 580), 32, 32);
-	mesh_->setUVRect(ofRectangle(0, 0, tex_.getWidth(), tex_.getHeight()));
-	printf("%f %f\n", tex_.getWidth(), tex_.getHeight());
+	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), 32, 32);
+	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
+	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
 	controller_.enable();
 }

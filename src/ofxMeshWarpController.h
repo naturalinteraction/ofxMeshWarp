@@ -3,6 +3,7 @@
 #include "ofEvents.h"
 #include "ofxMeshWarp.h"
 #include "ofRectangle.h"
+#include "ofPixels.h"
 #include "ofPolyline.h"
 
 namespace ofx{namespace MeshWarp{
@@ -58,7 +59,7 @@ namespace Editor {
 		void setTranslation(float x, float y) { setTranslation(glm::vec2(x,y)); }
 		void setTranslation(const glm::vec2 &point) { translation_ = point; }
 		void setScale(float s) { assert(s>0); scale_ = s; }
-		
+
 		virtual bool isEditing() const { return false; }
 		
 		virtual void clearOperation(){};
@@ -92,7 +93,8 @@ namespace Editor {
 		bool isEditing() const;
 
 		void setUVResolution(const glm::vec2 &res) { screen_to_coord_ = res; }
-		
+		void setPixels(ofPixels &pix);
+
 		virtual void mousePressed(ofMouseEventArgs &args);
 		virtual void mouseReleased(ofMouseEventArgs &args);
 		virtual void mouseMoved(ofMouseEventArgs &args);
@@ -119,6 +121,8 @@ namespace Editor {
 		glm::vec2 screen_to_coord_=glm::vec2(1024.f,1024.f);
 		float scroll_to_alpha_ = -1/100.f;
 		
+		ofPixels pixels;
+
 		bool isGrabbing() const { return mouse_op_.pressed_state==MouseOperation::STATE_GRABBING; }
 		bool isMakingRect() const { return mouse_op_.pressed_state==MouseOperation::STATE_MAKING_RECT; }
 		virtual bool isToggleNode() const { return ofGetKeyPressed(OF_KEY_ALT); }

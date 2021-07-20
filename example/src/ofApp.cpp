@@ -7,8 +7,6 @@ void ofApp::setup(){
 	ofLoadImage(tex_, "tondo_crop_square.jpg");
 	tex_.readToPixels(pix_);
 
-	printf("pix size %ld\n", pix_.size());
-
 	float pw = tex_.getWidth();
 	float ph = tex_.getHeight();
 
@@ -18,6 +16,7 @@ void ofApp::setup(){
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
 	controller_.enable();
+	controller_.setPixels(pix_);
 }
 
 //--------------------------------------------------------------

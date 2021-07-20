@@ -272,6 +272,13 @@ void PointController::mouseEntered(ofMouseEventArgs &args)
 void PointController::mouseExited(ofMouseEventArgs &args)
 {
 }
+
+void PointController::setPixels(ofPixels &pix)
+{
+	pixels = pix;
+	printf("pixels size %ld\n", pixels.size());
+}
+
 void PointController::keyPressed(ofKeyEventArgs &args)
 {
 	glm::vec2 delta;
@@ -306,6 +313,26 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 		for(auto &p : selected_) {
 			p -> setNodal(! p -> isNode());
 		}
+	}
+
+	if(args.key == 'p')
+	{
+		for(auto &mesh : meshes_) {
+			auto points = mesh->getPoints();
+			int count = 0;
+			for(auto &p : points) 
+			{
+				glm::vec2 b;
+				b.x = p->point().x;
+				b.y = p->point().y;
+				b = screenToLocal(b);
+				printf("count=%d x%f y%f\n", count, b.x -1920/2, b.y - 1080/2);
+				count++;
+			}
+		}
+		printf("anchor %f %f\n", anchor_point_.x, anchor_point_.y);
+		printf("scale %f\n", scale_);
+		printf("translation %f %f\n", translation_.x, translation_.y);
 	}
 }
 void PointController::keyReleased(ofKeyEventArgs &args)

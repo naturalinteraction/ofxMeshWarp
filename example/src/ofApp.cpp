@@ -5,7 +5,7 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	ofLoadImage(tex_, "tondo_crop_square.jpg");
+	ofLoadImage(tex_, "tondo_crop_square.png");
 	tex_.readToPixels(pix_);
 
 	float pw = tex_.getWidth();
@@ -18,7 +18,7 @@ void ofApp::setup()
 	controller_.add(mesh_);
 	controller_.enable();
 	controller_.setPixels(pix_);
-	controller_.setCenterOfProjection(580/2, 580/2);
+	controller_.setCenterOfProjection(580/2, 580);
 }
 
 //--------------------------------------------------------------
@@ -40,6 +40,8 @@ void ofApp::draw(){
 
 void ofApp::loadDaMesh()
 {
+	printf("loaDaMesh - my_translation %f %f \n", my_translation.x, my_translation.y);
+
 	ofxMeshWarpLoad loader;
 	vector<shared_ptr<ofxMeshWarp>> result = loader.load("transformation.txt");
 	if(!result.empty()) {
@@ -94,6 +96,21 @@ void ofApp::keyPressed(int key){
 	{
 		drama += 0.0001;
 		printf("drama %f\n", drama);
+		loadDaMesh();
+		controller_.elevationWarp(my_translation, my_scale, drama);
+	}
+
+    glm::vec2 delta;
+	switch(key) {
+		case OF_KEY_UP:		delta = glm::vec2(0,-1); break;
+		case OF_KEY_DOWN:	delta = glm::vec2(0, 1); break;
+		case OF_KEY_LEFT:	delta = glm::vec2(-1,0); break;
+		case OF_KEY_RIGHT:	delta = glm::vec2(1, 0); break;
+	}
+	if(glm::length2(delta) > 0)
+	{
+		my_translation += delta;
+		printf("my_translation %f %f \n", my_translation.x, my_translation.y);
 		loadDaMesh();
 		controller_.elevationWarp(my_translation, my_scale, drama);
 	}

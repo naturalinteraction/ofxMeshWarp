@@ -287,34 +287,6 @@ void PointController::setPixels(ofPixels &pix)
 
 void PointController::keyPressed(ofKeyEventArgs &args)
 {
-	glm::vec2 delta;
-	switch(args.key) {
-		case OF_KEY_UP:		delta = glm::vec2(0,-1)/scale_; break;
-		case OF_KEY_DOWN:	delta = glm::vec2(0, 1)/scale_; break;
-		case OF_KEY_LEFT:	delta = glm::vec2(-1,0)/scale_; break;
-		case OF_KEY_RIGHT:	delta = glm::vec2(1, 0)/scale_; break;
-	}
-	if(glm::length2(delta) > 0) {
-		bool moved_any = false;
-		for(auto &p : selected_) {
-			if(p->isNode()) {
-				if(isEditVertex()) {
-					PointHelper(p).moveVertex(delta*(isArrowKeyJump()?10:1));
-				}
-				if(isEditCoord()){
-					PointHelper(p).moveCoord(delta*(isArrowKeyJump()?10:1)/screen_to_coord_);
-				}
-				moved_any = true;
-			}
-		}
-		if(moved_any) {
-			for(auto &m : meshes_) {
-				m->setDirty();
-			}
-		}
-		mouse_op_.hover = getHit(mouse_op_.pos);
-	}
-
 	if(args.key == ' ') {
 		for(auto &p : selected_) {
 			p -> setNodal(! p -> isNode());
@@ -343,6 +315,7 @@ void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, fl
 			// printf("x%f y%f\n", center_of_projection.x, center_of_projection.y);
 
 			glm::vec2 delta = glm::vec2((b.x + my_translation.x - center_of_projection.x) * (my_scale + elevation * drama), (b.y + my_translation.y - center_of_projection.y) * (my_scale + elevation * drama)) / scale_;
+			delta += my_translation;
 
 			PointHelper(p).moveVertex(delta);
 

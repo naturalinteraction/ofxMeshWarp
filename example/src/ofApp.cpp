@@ -5,11 +5,17 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	ofLoadImage(tex_, "tondo_crop_square.png");
-	tex_.readToPixels(pix_);
+	ofPixels pix_;
 
-	float pw = tex_.getWidth();
-	float ph = tex_.getHeight();
+	ofTexture *t = new ofTexture();
+	tex_.push_back(t);
+	//	for (int i = 0; i < 2; i++)  // todo: load more images
+
+	ofLoadImage(*tex_[0], "tondo_crop_square.png");
+	tex_[0] -> readToPixels(pix_);  // av: elevation pixels
+
+	float pw = tex_[0] -> getWidth();
+	float ph = tex_[0] -> getHeight();
 
 	mesh_ = make_shared<ofxMeshWarp>();
 	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), 64, 64);
@@ -17,7 +23,7 @@ void ofApp::setup()
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
 	controller_.enable();
-	controller_.setPixels(pix_);
+	controller_.setElevationPixels(pix_);
 	controller_.setCenterOfProjection(580/2, 580);
 }
 
@@ -30,10 +36,9 @@ void ofApp::update()
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	tex_.bind();
-//	mesh_->drawMesh();
+	tex_[0] -> bind();
 	controller_.drawFace();
-	tex_.unbind();
+	tex_[0] -> unbind();
 	if (show_controller_interface)
 		controller_.draw();
 }

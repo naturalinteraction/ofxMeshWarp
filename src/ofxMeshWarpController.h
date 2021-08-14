@@ -95,7 +95,7 @@ namespace Editor {
 		bool isEditing() const;
 
 		void setUVResolution(const glm::vec2 &res) { screen_to_coord_ = res; }
-		void setPixels(ofPixels &pix);
+		void setElevationPixels(ofPixels &pix);
 		void elevationWarp(glm::vec2 my_translation, float my_scale, float drama);
 
 		virtual void mousePressed(ofMouseEventArgs &args);
@@ -124,7 +124,7 @@ namespace Editor {
 		glm::vec2 screen_to_coord_=glm::vec2(1024.f,1024.f);
 		float scroll_to_alpha_ = -1/100.f;
 		
-		ofPixels pixels;
+		ofPixels pixels;  // av: elevation pixels
 
 		bool isGrabbing() const { return mouse_op_.pressed_state==MouseOperation::STATE_GRABBING; }
 		bool isMakingRect() const { return mouse_op_.pressed_state==MouseOperation::STATE_MAKING_RECT; }

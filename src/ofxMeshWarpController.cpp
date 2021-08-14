@@ -279,7 +279,7 @@ void PointController::mouseExited(ofMouseEventArgs &args)
 {
 }
 
-void PointController::setPixels(ofPixels &pix)
+void PointController::setElevationPixels(ofPixels &pix)
 {
 	pixels = pix;
 	printf("pixels size %ld\n", pixels.size());

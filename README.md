@@ -37,3 +37,6 @@ So if you call divide/reduce many times, you may need to call `ofxMeshWarp::gc()
 
 ## License
 MIT license.
+
+### Git Credentials
+Stored by default in `~/.git-credentials` in plain text.

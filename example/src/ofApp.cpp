@@ -84,12 +84,14 @@ void ofApp::draw()
 	ofPopView();
 */
 
-	string s = "w,s (scale) " + to_string(my_scale) + "\n";
+	string s = "\nw,s (scale) " + to_string(my_scale) + "\n";
 	s += "o,p (rotation) " + to_string(my_rotation) + "\n";
 	s += "q,z (center of projection) " + to_string(controller_.center_of_projection.y) + "\n";
 	s += "a,d (elevation factor) " + to_string(drama) + "\n";
 	s += "arrows (translation) " + to_string(my_translation.x) + " " + to_string(my_translation.y) + "\n";
-	s += "L,S (load & save)";
+	s += "L,S (load & save)\n";
+	s += "m (show/hide mesh)\n";
+	s += "fps " + to_string(ofGetFrameRate()) + "\n";
 	ofDrawBitmapStringHighlight(s, 100, 100);
 }
 

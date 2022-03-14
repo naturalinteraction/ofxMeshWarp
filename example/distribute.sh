@@ -13,5 +13,6 @@ break ;
 fi
 done
 
-zip "poll.zip" -re bin install*.sh
-aws s3 mv "poll.zip" s3://natural-interaction/files/
+zip "pollex.zip" -r bin/example
+# install*.sh
+aws s3 mv "pollex.zip" s3://natural-interaction/files/

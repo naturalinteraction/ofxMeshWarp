@@ -77,6 +77,14 @@ void ofApp::draw()
 
 	ofPopView();
 */
+
+	string s = "w,s (scale) " + to_string(my_scale) + "\n";
+	s += "o,p (rotation) " + to_string(my_rotation) + "\n";
+	s += "q,z (center of projection) " + to_string(controller_.center_of_projection.y) + "\n";
+	s += "a,d (elevation factor) " + to_string(drama) + "\n";
+	s += "arrows (translation) " + to_string(my_translation.x) + " " + to_string(my_translation.y) + "\n";
+	s += "L,S (load & save)";
+	ofDrawBitmapStringHighlight(s, 100, 100);
 }
 
 void ofApp::loadDaMesh()

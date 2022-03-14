@@ -1,6 +1,7 @@
 - dopo aver fatto il load della mesh non si possono usare i tasti di calibrazione "drama"
-- modo per, all'avvio, resettare invece di fare load(), per poter usare i tasti di calibrazione
+- modo per, all'avvio, resettare (ovvero fare un save()) invece di fare load(), per poter usare i tasti di calibrazione
 - salvare la rotazione
 - load multiple map images
 - todo: image is 580x580 and 1000x1000 on screen
 - 2 viewports
+- bande di crossfade tra le due mesh/viewport

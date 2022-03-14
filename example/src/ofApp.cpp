@@ -1,10 +1,15 @@
 #include "ofApp.h"
 #include "ofxMeshWarpIO.h"
+#include "say.h"
 using namespace std;
 
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+
+	say(ofGetScreenWidth());
+	say(ofGetScreenHeight());
+
 	ofPixels pix_;
 
 	ofTexture *t = new ofTexture();
@@ -35,12 +40,40 @@ void ofApp::update()
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw()
+{
+    // we'll need the viewports later on for the two projected halves
+    ofRectangle viewport;
+    viewport.x = 0;
+    viewport.y = 0;
+    viewport.width = 1920;  // 960
+    viewport.height = 1080;
+
+	ofPushView();
+	ofViewport(viewport);
+
 	tex_[0] -> bind();
 	controller_.drawFace();
 	tex_[0] -> unbind();
 	if (show_controller_interface)
 		controller_.draw();
+
+	ofPopView();
+
+/*
+    // this will be needed to show the second half of the projection
+    viewport.x = 960;
+	ofPushView();
+	ofViewport(viewport);
+
+	tex_[0] -> bind();
+	controller_.drawFace();
+	tex_[0] -> unbind();
+	if (show_controller_interface)
+		controller_.draw();
+
+	ofPopView();
+*/
 }
 
 void ofApp::loadDaMesh()

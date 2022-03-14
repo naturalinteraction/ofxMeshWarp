@@ -9,9 +9,15 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-
+	int sw = ofGetScreenWidth();
+	int sh = ofGetScreenHeight();
 	say(ofGetScreenWidth());
 	say(ofGetScreenHeight());
+	if (sw * sh == 0)
+	{
+		say("screen width or height is zero. exiting.");
+		std::exit(0);
+	}
 
 	ofPixels pix_;
 

@@ -46,7 +46,7 @@ void ControllerBase::draw() const
 	ofTranslate(translation_);
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
-    printf("r%f\n", rotation_);
+    // printf("r%f\n", rotation_);
     ofRotateDeg(rotation_);  // av: todo
 	for(auto &mesh : meshes_) {
 		mesh->drawWireframe();
@@ -300,7 +300,7 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, float drama, float my_rotation)
 {
     rotation_ = my_rotation;
-	printf("R%f\n", rotation_);
+	// printf("R%f\n", rotation_);
     for(auto &mesh : meshes_) {
 		auto points = mesh->getPoints();
 		int count = 0;

@@ -3,6 +3,9 @@
 #include "say.h"
 using namespace std;
 
+#define MESH_COLS  128
+#define MESH_ROWS  96
+
 //--------------------------------------------------------------
 void ofApp::setup()
 {
@@ -23,7 +26,7 @@ void ofApp::setup()
 	float ph = tex_[0] -> getHeight();
 
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), 64, 64);
+	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), MESH_COLS, MESH_ROWS);  // todo
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);

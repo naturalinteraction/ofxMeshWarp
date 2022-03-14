@@ -55,7 +55,7 @@ void ControllerBase::draw() const
 	// printf("%f %f\n", center_of_projection.x, center_of_projection.y);
 	ofDrawCircle(center_of_projection.x * 1000.0 / 580.0 + 1920/2 - 500,
 		         center_of_projection.y * 1000.0 / 580.0 + 1080/2 - 500,
-		         16);
+		         16);  // todo
 	ofSetColor(ofColor(255));
 	drawCustom();
 	ofPopMatrix();
@@ -314,7 +314,7 @@ void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, fl
 			b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;
 			int ibx = b.x;
 			int iby = b.y;
-			float elevation = /*255 - */pixels[3 * (iby * 580 + ibx)];
+			float elevation = /*255 - */pixels[3 * (iby * 580 + ibx)];  // todo
 
 			// printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
 			// printf("x%f y%f\n", center_of_projection.x, center_of_projection.y);

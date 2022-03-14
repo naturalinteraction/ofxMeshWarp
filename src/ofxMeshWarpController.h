@@ -61,7 +61,7 @@ namespace Editor {
 		void setScale(float s) { assert(s>0); scale_ = s; }
 
 		glm::vec2 center_of_projection;
-
+        float rotation_ = 0.0;
 		virtual bool isEditing() const { return false; }
 		
 		virtual void clearOperation(){};
@@ -83,7 +83,7 @@ namespace Editor {
 		glm::vec2 anchor_point_=glm::vec2(0,0);
 		glm::vec2 translation_=glm::vec2(0,0);
 		float scale_=1;
-		glm::vec2 screenToLocal(glm::vec2 src) const { return (src-translation_)/scale_+anchor_point_; }
+        glm::vec2 screenToLocal(glm::vec2 src) const { return (src-translation_)/scale_+anchor_point_; }
 		glm::vec2 localToScreen(glm::vec2 src) const { return (src-anchor_point_)*scale_+translation_; }
 	};
 
@@ -96,7 +96,7 @@ namespace Editor {
 
 		void setUVResolution(const glm::vec2 &res) { screen_to_coord_ = res; }
 		void setElevationPixels(ofPixels &pix);
-		void elevationWarp(glm::vec2 my_translation, float my_scale, float drama);
+		void elevationWarp(glm::vec2 my_translation, float my_scale, float drama, float my_rotation);
 
 		virtual void mousePressed(ofMouseEventArgs &args);
 		virtual void mouseReleased(ofMouseEventArgs &args);

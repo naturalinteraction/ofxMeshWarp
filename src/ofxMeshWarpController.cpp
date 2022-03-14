@@ -46,6 +46,8 @@ void ControllerBase::draw() const
 	ofTranslate(translation_);
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
+    printf("r%f\n", rotation_);
+    ofRotateDeg(rotation_);  // av: todo
 	for(auto &mesh : meshes_) {
 		mesh->drawWireframe();
 	}
@@ -64,6 +66,7 @@ void ControllerBase::drawFace() const
 	ofTranslate(translation_);
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
+    ofRotateDeg(rotation_);  // av: todo
 	for(auto &mesh : meshes_) {
 		mesh->drawMesh();
 	}
@@ -294,9 +297,11 @@ void PointController::keyPressed(ofKeyEventArgs &args)
 	}
 }
 
-void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, float drama)
+void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, float drama, float my_rotation)
 {
-	for(auto &mesh : meshes_) {
+    rotation_ = my_rotation;
+	printf("R%f\n", rotation_);
+    for(auto &mesh : meshes_) {
 		auto points = mesh->getPoints();
 		int count = 0;
 		for(auto &p : points) 
@@ -305,7 +310,7 @@ void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, fl
 			b.x = p->point().x;
 			b.y = p->point().y;
 			b = screenToLocal(b);
-			b.x = (b.x -1920/2 + 500) * 579.0 / 1000.0;  // image is 580x580 and 1000x1000 on screen
+			b.x = (b.x -1920/2 + 500) * 579.0 / 1000.0;  // todo: image is 580x580 and 1000x1000 on screen
 			b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;
 			int ibx = b.x;
 			int iby = b.y;

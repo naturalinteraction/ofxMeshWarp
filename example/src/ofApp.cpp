@@ -92,12 +92,28 @@ void ofApp::loadDaMesh()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+	if(key == 'o')
+	{
+		my_rotation -= 0.01;
+		say(my_rotation);
+		loadDaMesh();
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
+		controller_.setRotation(my_rotation);
+	}
+	if(key == 'p')
+	{
+		my_rotation += 0.01;
+		say(my_rotation);
+		loadDaMesh();
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
+		controller_.setRotation(my_rotation);
+	}
 	if(key == 'q')
 	{
 		controller_.setCenterOfProjection(controller_.center_of_projection.x, controller_.center_of_projection.y - 10);
 		printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 
 	if(key == 'z')
@@ -105,7 +121,7 @@ void ofApp::keyPressed(int key){
 		controller_.setCenterOfProjection(controller_.center_of_projection.x, controller_.center_of_projection.y + 10);
 		printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 
 	if(key == 'w')
@@ -113,14 +129,14 @@ void ofApp::keyPressed(int key){
 		my_scale -= 0.01;
 		printf("my_scale %f\n", my_scale);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 	if(key == 's')
 	{
 		my_scale += 0.01;
 		printf("my_scale %f\n", my_scale);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 
 	if(key == 'a')
@@ -128,14 +144,14 @@ void ofApp::keyPressed(int key){
 		drama -= 0.0001;
 		printf("drama %f\n", drama);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 	if(key == 'd')
 	{
 		drama += 0.0001;
 		printf("drama %f\n", drama);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 
     glm::vec2 delta;
@@ -150,7 +166,7 @@ void ofApp::keyPressed(int key){
 		my_translation += delta;
 		printf("my_translation %f %f \n", my_translation.x, my_translation.y);
 		loadDaMesh();
-		controller_.elevationWarp(my_translation, my_scale, drama);
+		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 
 	switch(key) {

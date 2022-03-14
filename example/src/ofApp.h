@@ -33,5 +33,6 @@ private:
 
 	float drama = 0.0;
 	float my_scale = 0.0;
+	float my_rotation = 0.0;
 	glm::vec2 my_translation;
 };

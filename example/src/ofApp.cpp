@@ -5,7 +5,7 @@ using namespace std;
 
 #define MESH_COLS  128
 #define MESH_ROWS  96
-
+#define MESH_WIDTH 600.0
 //--------------------------------------------------------------
 void ofApp::setup()
 {
@@ -13,6 +13,13 @@ void ofApp::setup()
 	int sh = ofGetScreenHeight();
 	say(ofGetScreenWidth());
 	say(ofGetScreenHeight());
+
+	say(ofGetWindowWidth());
+	say(ofGetWindowHeight());
+
+	say(ofGetWidth());
+	say(ofGetHeight());
+
 	if (sw * sh == 0)
 	{
 		say("screen width or height is zero. exiting.");
@@ -32,13 +39,13 @@ void ofApp::setup()
 	float ph = tex_[0] -> getHeight();
 
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(1920/2 - pw * 1000.0 / ph / 2.0, 1080/2 - 500, pw * 1000.0 / ph, 1000.0), MESH_COLS, MESH_ROWS);  // todo
+	mesh_->setup(ofRectangle(1920/2 - pw * MESH_WIDTH / ph / 2.0, 1080/2 - MESH_WIDTH/2, pw * MESH_WIDTH / ph, MESH_WIDTH), MESH_COLS, MESH_ROWS);  // todo
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
 	controller_.enable();
 	controller_.setElevationPixels(pix_);
-	controller_.setCenterOfProjection(580/2, 580);
+	controller_.setCenterOfProjection(580/2, 580);  // todo
 }
 
 //--------------------------------------------------------------
@@ -51,6 +58,8 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
+	ofBackground(255, 0, 0, 255);
+
     // we'll need the viewports later on for the two projected halves
     ofRectangle viewport;
     viewport.x = 0;

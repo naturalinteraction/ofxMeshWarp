@@ -25,7 +25,7 @@ void ofApp::setup()
 	tex_.push_back(t);
 	//	for (int i = 0; i < 2; i++)  // todo: load more images
 
-	ofLoadImage(*tex_[0], "tondo_crop_square.png");
+	ofLoadImage(*tex_[0], "deagostini4096.jpg");
 	tex_[0] -> readToPixels(pix_);  // av: elevation pixels
 
 	float pw = tex_[0] -> getWidth();

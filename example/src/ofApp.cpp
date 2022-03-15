@@ -100,12 +100,14 @@ void ofApp::loadDaMesh()
 	printf("loaDaMesh - my_translation %f %f \n", my_translation.x, my_translation.y);
 
 	ofxMeshWarpLoad loader;
-	vector<shared_ptr<ofxMeshWarp>> result = loader.load("transformation.txt");
+	vector<shared_ptr<ofxMeshWarp>> result = loader.load("mesh.sav");
 	if(!result.empty()) {
 		controller_.clear();
 		mesh_ = result[0];
 		controller_.add(mesh_);
 	}
+	else
+		say("nothing to load.");
 }
 
 //--------------------------------------------------------------
@@ -197,7 +199,7 @@ void ofApp::keyPressed(int key){
 		case 'S': {
 			ofxMeshWarpSave saver;
 			saver.addMesh(mesh_);
-			saver.save("transformation.txt");
+			saver.save("mesh.sav");
 		}	break;
 		case 'L': {
 			loadDaMesh();
@@ -205,6 +207,7 @@ void ofApp::keyPressed(int key){
 			my_scale = 0.0;
 			my_translation.x = 0.0;
 			my_translation.y = 0.0;
+			// todo my_rotation ?
 		}	break;
 	}
 }

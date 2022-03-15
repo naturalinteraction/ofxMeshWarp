@@ -53,8 +53,8 @@ void ControllerBase::draw() const
 	}
 	ofSetColor(ofColor(0,0,255));
 	// printf("%f %f\n", center_of_projection.x, center_of_projection.y);
-	ofDrawCircle(center_of_projection.x * 1000.0 / 580.0 + 1920/2 - 500,
-		         center_of_projection.y * 1000.0 / 580.0 + 1080/2 - 500,
+	ofDrawCircle(center_of_projection.x * 1000.0 / 580.0 + 1920/2 - 500,  // todo
+		         center_of_projection.y * 1000.0 / 580.0 + 1080/2 - 500,  // todo
 		         16);  // todo
 	ofSetColor(ofColor(255));
 	drawCustom();
@@ -311,7 +311,7 @@ void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, fl
 			b.y = p->point().y;
 			b = screenToLocal(b);
 			b.x = (b.x -1920/2 + 500) * 579.0 / 1000.0;  // todo: image is 580x580 and 1000x1000 on screen
-			b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;
+			b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;  // todo
 			int ibx = b.x;
 			int iby = b.y;
 			float elevation = /*255 - */pixels[3 * (iby * 580 + ibx)];  // todo

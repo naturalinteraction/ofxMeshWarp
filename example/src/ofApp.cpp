@@ -4,8 +4,9 @@
 using namespace std;
 
 #define MESH_COLS  128
-#define MESH_ROWS  96
-#define MESH_WIDTH 600.0
+#define MESH_ROWS  128
+#define MESH_WIDTH 1920.0
+
 //--------------------------------------------------------------
 void ofApp::setup()
 {
@@ -39,13 +40,13 @@ void ofApp::setup()
 	float ph = tex_[0] -> getHeight();
 
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(1920/2 - pw * MESH_WIDTH / ph / 2.0, 1080/2 - MESH_WIDTH/2, pw * MESH_WIDTH / ph, MESH_WIDTH), MESH_COLS, MESH_ROWS);  // todo
+	mesh_->setup(ofRectangle(ofGetScreenWidth()/2 - pw * MESH_WIDTH / ph / 2.0, ofGetScreenHeight()/2 - MESH_WIDTH/2, pw * MESH_WIDTH / ph, MESH_WIDTH), MESH_COLS, MESH_ROWS);
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
 	controller_.enable();
 	controller_.setElevationPixels(pix_);
-	controller_.setCenterOfProjection(580/2, 580);  // todo
+	controller_.setCenterOfProjection(4096 / 2.0, 4096 * 0.5);
 }
 
 //--------------------------------------------------------------

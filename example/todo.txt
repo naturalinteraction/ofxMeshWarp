@@ -1,6 +1,5 @@
 PRIMARIO
-- image is 580x580 and 1000x1000 on screen - caricare DTM che mi da' Sergio
-- fullscreen (io con anydesk vedo solo uno schermo, non due)
+- caricare DTM che mi da' Sergio
 
 SECONDARIO
 - salvare separatamente la rotazione (e gia' che ci sono anche scala, traslazione, ...)

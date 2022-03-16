@@ -6,9 +6,17 @@ using namespace ofx::MeshWarp;
 using namespace ofx::MeshWarp::Editor;
 using namespace std;
 
+#define IMAGE_SIZE_SCREEN	1920.0
+#define IMAGE_SIZE_PIXEL	4096.0
+
+float PROJECTION_WIDTH;
+float PROJECTION_HEIGHT;
+
 ControllerBase::ControllerBase()
 {
 //	enable();
+	PROJECTION_WIDTH = ofGetScreenWidth();
+	PROJECTION_HEIGHT = ofGetScreenHeight();
 }
 ControllerBase::~ControllerBase()
 {
@@ -53,9 +61,9 @@ void ControllerBase::draw() const
 	}
 	ofSetColor(ofColor(0,0,255));
 	// printf("%f %f\n", center_of_projection.x, center_of_projection.y);
-	ofDrawCircle(center_of_projection.x * 1000.0 / 580.0 + 1920/2 - 500,  // todo
-		         center_of_projection.y * 1000.0 / 580.0 + 1080/2 - 500,  // todo
-		         16);  // todo
+	ofDrawCircle(center_of_projection.x * IMAGE_SIZE_SCREEN / IMAGE_SIZE_PIXEL + PROJECTION_WIDTH/2 - IMAGE_SIZE_SCREEN/2,
+		         center_of_projection.y * IMAGE_SIZE_SCREEN / IMAGE_SIZE_PIXEL + PROJECTION_HEIGHT/2 - IMAGE_SIZE_SCREEN/2,
+		         16);
 	ofSetColor(ofColor(255));
 	drawCustom();
 	ofPopMatrix();
@@ -310,14 +318,12 @@ void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, fl
 			b.x = p->point().x;
 			b.y = p->point().y;
 			b = screenToLocal(b);
-			b.x = (b.x -1920/2 + 500) * 579.0 / 1000.0;  // todo: image is 580x580 and 1000x1000 on screen
-			b.y = (b.y -1080/2 + 500) * 579.0 / 1000.0;  // todo
+
+			b.x = (b.x -PROJECTION_WIDTH/2 + IMAGE_SIZE_SCREEN/2) * (IMAGE_SIZE_PIXEL - 1.0) / IMAGE_SIZE_SCREEN;
+			b.y = (b.y -PROJECTION_HEIGHT/2 + IMAGE_SIZE_SCREEN/2) * (IMAGE_SIZE_PIXEL - 1.0) / IMAGE_SIZE_SCREEN;
 			int ibx = b.x;
 			int iby = b.y;
-			float elevation = /*255 - */pixels[3 * (iby * 580 + ibx)];  // todo
-
-			// printf("count=%d x%f y%f elev%f\n", count, b.x, b.y, elevation);
-			// printf("x%f y%f\n", center_of_projection.x, center_of_projection.y);
+			float elevation = pixels[3 * (iby * IMAGE_SIZE_PIXEL + ibx)];
 
 			glm::vec2 delta = glm::vec2((b.x + my_translation.x - center_of_projection.x) * (my_scale + elevation * drama), (b.y + my_translation.y - center_of_projection.y) * (my_scale + elevation * drama)) / scale_;
 			delta += my_translation;

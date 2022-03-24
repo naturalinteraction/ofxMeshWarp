@@ -59,6 +59,12 @@ void ofApp::setup()
 	float pw = tex_[0] -> getWidth();
 	float ph = tex_[0] -> getHeight();
 
+	if (pw != IMAGE_SIZE_PIXEL || ph != IMAGE_SIZE_PIXEL)
+	{
+		say("images must be 4096x4096. Exiting.");
+		std::exit(0);
+	}
+
 	mesh_ = make_shared<ofxMeshWarp>();
 	mesh_->setup(ofRectangle(ofGetScreenWidth()/2 - pw * IMAGE_SIZE_SCREEN / ph / 2.0,
 		                     ofGetScreenHeight()/2 - IMAGE_SIZE_SCREEN/2,

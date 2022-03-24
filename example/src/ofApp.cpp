@@ -10,6 +10,9 @@ using namespace std;
 
 #define X_SCALE    1.0  // 1.0 or 2.0 (== number of displays)  // todo: in XML?
 
+// todo: 2 controller separati nei due viewport
+// todo: bande di crossfade tra le due mesh/viewport
+
 //--------------------------------------------------------------
 ofApp::ofApp(bool reset)
 {
@@ -51,9 +54,9 @@ void ofApp::setup()
 	ofTexture *t = new ofTexture();
 	tex_.push_back(t);
 	//	for (int i = 0; i < 2; i++)  // todo: load more images
-
+	// - load multiple map images (oltre al DTM che a quel punto non si vedra')
 	// ofLoadImage(*tex_[0], "deagostini4096.jpg");
-	ofLoadImage(*tex_[0], "DTM.jpg");
+	ofLoadImage(*tex_[0], "DTM.jpg");  // todo: caricare DTM che mi da' Sergio
 	tex_[0] -> readToPixels(pix_);  // av: elevation pixels
 
 	float pw = tex_[0] -> getWidth();

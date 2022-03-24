@@ -1,7 +1,0 @@
-PRIMARIO
-- caricare DTM che mi da' Sergio
-
-SECONDARIO
-- load multiple map images (oltre al DTM che a quel punto non si vedra')
-- 2 controller separati nei due viewport
-- bande di crossfade tra le due mesh/viewport

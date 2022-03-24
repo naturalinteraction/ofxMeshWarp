@@ -10,10 +10,10 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-//	ofSetFrameRate(61);
-    ofSetVerticalSync(false);
-    ofEnableAntiAliasing();
-    ofEnableSmoothing();
+	// ofSetFrameRate(61);
+    // ofSetVerticalSync(false);
+    // ofEnableAntiAliasing();
+    // ofEnableSmoothing();
 
 	int sw = ofGetScreenWidth();
 	int sh = ofGetScreenHeight();
@@ -86,7 +86,6 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
-
     // this will be needed to show the second half of the projection
     viewport.x = 1920;
 	ofPushView();
@@ -96,8 +95,8 @@ void ofApp::draw()
 	tex_[0] -> bind();
 	controller_.drawFace();
 	tex_[0] -> unbind();
-	//if (show_controller_interface)
-	//	controller_.draw();
+	// if (show_controller_interface)
+	//   controller_.draw();
 
 	ofScale(1.0, 1.0, 1.0);
 

@@ -16,9 +16,9 @@ int main( ){
 
     settings.setSize(1920, 1080);
     //settings.decorated = false;
-    settings.setPosition(ofVec2f(1920,0));
+    settings.setPosition(ofVec2f(0,0));
     //settings.resizable = true;
-    settings.monitor = 1; // Specify monitor one
+    settings.monitor = 0; // Specify monitor one
     ofCreateWindow(settings) -> setVerticalSync(false);
     ofAppGLFWWindow::listMonitors();  // prints to console
     ofRunApp(new ofApp);

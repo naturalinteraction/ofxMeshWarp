@@ -1,3 +1,4 @@
 bin/data/mesh.sav
 bin/data/*.jpg
+bin/data/*.xml
 bin/example_debug

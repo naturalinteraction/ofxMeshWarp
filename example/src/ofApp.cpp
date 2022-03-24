@@ -253,6 +253,9 @@ void ofApp::keyPressed(int key){
 			my_scale = 0.0;
 			my_translation.x = 0.0;
 			my_translation.y = 0.0;
+			controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
+			say(my_rotation);
+			controller_.setRotation(my_rotation);
 		}	break;
 	}
 }

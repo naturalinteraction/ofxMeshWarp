@@ -52,7 +52,7 @@ void ControllerBase::draw() const
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
     // printf("r%f\n", rotation_);
-    ofRotateDeg(rotation_);  // av: todo
+    ofRotateDeg(rotation_);  // av
 	for(auto &mesh : meshes_) {
 		mesh->drawWireframe();
 	}
@@ -62,7 +62,7 @@ void ControllerBase::draw() const
 		         center_of_projection.y * IMAGE_SIZE_SCREEN / IMAGE_SIZE_PIXEL + PROJECTION_HEIGHT/2 - IMAGE_SIZE_SCREEN/2,
 		         16);
 	ofSetColor(ofColor(255));
-	drawCustom();
+	// drawCustom();
 	ofPopMatrix();
 }
 void ControllerBase::drawFace() const
@@ -71,7 +71,7 @@ void ControllerBase::drawFace() const
 	ofTranslate(translation_);
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
-    ofRotateDeg(rotation_);  // av: todo
+    ofRotateDeg(rotation_);  // av
 	for(auto &mesh : meshes_) {
 		mesh->drawMesh();
 	}

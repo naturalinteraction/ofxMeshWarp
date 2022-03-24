@@ -9,8 +9,7 @@ using namespace std;
 #define MESH_ROWS  128
 #define IMAGE_COUNT  4
 
-#define X_SCALE    1.0  // 1.0 or 2.0 (== number of displays)  // todo: in XML?
-
+// todo: DTM allineato
 // todo: 2 controller separati nei due viewport
 // todo: bande di crossfade tra le due mesh/viewport
 
@@ -56,7 +55,7 @@ void ofApp::setup()
 	{
 		ofTexture *t = new ofTexture();
 		tex_.push_back(t);
-		ofLoadImage(*tex_[i], to_string(i) + string(".jpg"));  // todo: caricare DTM che mi da' Sergio
+		ofLoadImage(*tex_[i], to_string(i) + string(".jpg"));
 		if (i == 0)
 			tex_[i] -> readToPixels(pix_);  // av: elevation pixels
 
@@ -122,7 +121,7 @@ void ofApp::draw()
 	ofPushView();
 	ofViewport(viewport);
 	ofSetupScreen();
-	ofScale(X_SCALE, 1.0, 1.0);
+	ofScale(x_scale, 1.0, 1.0);
 
 	tex_[image_number] -> bind();
 	controller_.drawFace();
@@ -138,7 +137,7 @@ void ofApp::draw()
 	ofPushView();
 	ofViewport(viewport);
 	ofSetupScreen();
-	ofScale(X_SCALE, 1.0, 1.0);
+	ofScale(x_scale, 1.0, 1.0);
 
 	tex_[0] -> bind();
 	controller_.drawFace();
@@ -188,7 +187,10 @@ void ofApp::loadValues()
 	printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
 	loadDaMesh();
 	controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
-}
+
+	x_scale = XML.getValue("x_scale", 1.0);
+    say(x_scale);
+ }
 
 void ofApp::loadDaMesh()
 {
@@ -211,6 +213,7 @@ void ofApp::saveValues()
 {
 	ofxXmlSettings XML;
 	XML.setValue("rotation", my_rotation);
+	XML.setValue("x_scale", 1.0);
 	XML.setValue("center_of_projection_x", controller_.center_of_projection.x);
 	XML.setValue("center_of_projection_y", controller_.center_of_projection.y);
 	XML.saveFile("values.xml");

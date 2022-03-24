@@ -12,6 +12,13 @@ using namespace std;
 #define X_SCALE    1.0
 
 //--------------------------------------------------------------
+ofApp::ofApp(bool reset)
+{
+	say(reset);
+	should_reset = reset;
+	should_load = ! reset;
+}
+
 void ofApp::setup()
 {
 	// ofSetFrameRate(61);
@@ -61,7 +68,23 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-	ofSetWindowTitle(ofToString(ofGetFrameRate(),2));
+	// ofSetWindowTitle(ofToString(ofGetFrameRate(),2));
+	if (should_reset)
+	{
+		should_reset = false;
+		say("initial save");
+		saveValues();
+		saveDaMesh();
+		say("done");
+	}
+	if (should_load)
+	{
+		say("initial load");
+		should_load = false;
+		loadValues();
+		loadDaMesh();
+		say("done");
+	}
 	mesh_->update();
 }
 
@@ -129,6 +152,7 @@ void ofApp::loadValues()
     }
     my_rotation = XML.getValue("rotation", 0.0);
     say(my_rotation);
+    controller_.setRotation(my_rotation);
 }
 
 void ofApp::loadDaMesh()
@@ -137,10 +161,12 @@ void ofApp::loadDaMesh()
 
 	ofxMeshWarpLoad loader;
 	vector<shared_ptr<ofxMeshWarp>> result = loader.load("mesh.sav");
+	say("loaded");
 	if(!result.empty()) {
 		controller_.clear();
 		mesh_ = result[0];
 		controller_.add(mesh_);
+		say("added");
 	}
 	else
 		say("nothing to load.");
@@ -154,13 +180,20 @@ void ofApp::saveValues()
 	say(my_rotation);
 }
 
+void ofApp::saveDaMesh()
+{
+	ofxMeshWarpSave saver;
+	saver.addMesh(mesh_);
+	saver.save("mesh.sav");
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
 	if(key == 'o')
 	{
 		loadDaMesh();
-		my_rotation -= 0.01;
+		my_rotation -= 0.1;
 		say(my_rotation);
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 		controller_.setRotation(my_rotation);
@@ -168,7 +201,7 @@ void ofApp::keyPressed(int key){
 	if(key == 'p')
 	{
 		loadDaMesh();
-		my_rotation += 0.01;
+		my_rotation += 0.1;
 		say(my_rotation);
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 		controller_.setRotation(my_rotation);
@@ -241,9 +274,7 @@ void ofApp::keyPressed(int key){
 			break;
 		}
 		case 'S': {
-			ofxMeshWarpSave saver;
-			saver.addMesh(mesh_);
-			saver.save("mesh.sav");
+			saveDaMesh();
 			saveValues();
 		}	break;
 		case 'L': {
@@ -253,9 +284,6 @@ void ofApp::keyPressed(int key){
 			my_scale = 0.0;
 			my_translation.x = 0.0;
 			my_translation.y = 0.0;
-			controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
-			say(my_rotation);
-			controller_.setRotation(my_rotation);
 		}	break;
 	}
 }

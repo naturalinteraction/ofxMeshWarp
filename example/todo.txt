@@ -2,9 +2,9 @@ PRIMARIO
 - caricare DTM che mi da' Sergio
 
 SECONDARIO
-- salvare separatamente la rotazione (e gia' che ci sono anche scala, traslazione, ...)
-- dopo aver fatto il load della mesh non si possono usare i tasti di calibrazione "drama"
-- modo per, all'avvio, resettare (ovvero fare un save()) invece di fare load(), per poter usare i tasti di calibrazione
+- save/load center of projection
+- dopo aver fatto il load della mesh (non resettata) non si possono usare i tasti di calibrazione "drama"
+
 - load multiple map images (oltre al DTM che a quel punto non si vedra')
 - 2 controller separati nei due viewport
 - bande di crossfade tra le due mesh/viewport

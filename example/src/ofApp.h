@@ -7,6 +7,7 @@
 class ofApp : public ofBaseApp{
 	
 public:
+	ofApp(bool reset);
 	void setup();
 	void update();
 	void draw();
@@ -25,6 +26,7 @@ public:
 	void gotMessage(ofMessage msg);
 
 	void loadDaMesh();
+	void saveDaMesh();
 
 private:
 	std::shared_ptr<ofxMeshWarp> mesh_;
@@ -36,4 +38,6 @@ private:
 	float my_scale = 0.0;
 	float my_rotation = 0.0;
 	glm::vec2 my_translation;
+	bool should_reset;
+	bool should_load;
 };

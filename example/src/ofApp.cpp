@@ -119,6 +119,7 @@ void ofApp::draw()
 
 	ofPushView();
 	ofViewport(viewport);
+	ofSetupScreen();
 	ofScale(X_SCALE, 1.0, 1.0);
 
 	tex_[0] -> bind();
@@ -134,6 +135,7 @@ void ofApp::draw()
     viewport.x = IMAGE_SIZE_SCREEN;
 	ofPushView();
 	ofViewport(viewport);
+	ofSetupScreen();
 	ofScale(X_SCALE, 1.0, 1.0);
 
 	tex_[0] -> bind();
@@ -146,7 +148,7 @@ void ofApp::draw()
 
 	ofPopView();
 
-	string s = "\nw,s (scale) " + to_string(my_scale) + "\n";
+	string s = "\nSETUP MODE\nw,s (scale) " + to_string(my_scale) + "\n";
 	s += "o,p (rotation) " + to_string(my_rotation) + "\n";
 	s += "q,z (center of projection) " + to_string(controller_.center_of_projection.y) + "\n";
 	s += "a,d (elevation factor) " + to_string(drama) + "\n";
@@ -157,7 +159,7 @@ void ofApp::draw()
 
 	if (! has_been_reset)
 	{
-		s = "m (show/hide mesh)\n";
+		s = "\nPLAYBACK MODE\nm (show/hide mesh)\n";
 		s += "fps " + to_string(ofGetFrameRate()) + "\n";
 	}
 	ofDrawBitmapStringHighlight(s, 1200, 100);

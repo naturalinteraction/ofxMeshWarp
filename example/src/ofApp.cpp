@@ -5,8 +5,7 @@
 #include "say.h"
 using namespace std;
 
-#define MESH_COLS  128
-#define MESH_ROWS  128
+#define MESH_ELEMENTS  128  // 256 looks better
 #define IMAGE_COUNT  4
 
 // todo: DTM allineato
@@ -74,7 +73,7 @@ void ofApp::setup()
 		                     ofGetScreenHeight()/2 - IMAGE_SIZE_SCREEN/2,
 		                     pw * IMAGE_SIZE_SCREEN / ph,
 		                     IMAGE_SIZE_SCREEN),
-	                         MESH_COLS, MESH_ROWS);
+	                         MESH_ELEMENTS, MESH_ELEMENTS);
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);

@@ -7,6 +7,7 @@ using namespace std;
 
 #define MESH_COLS  128
 #define MESH_ROWS  128
+#define IMAGE_COUNT  4
 
 #define X_SCALE    1.0  // 1.0 or 2.0 (== number of displays)  // todo: in XML?
 
@@ -50,24 +51,25 @@ void ofApp::setup()
 	}
 
 	ofPixels pix_;
-
-	ofTexture *t = new ofTexture();
-	tex_.push_back(t);
-	//	for (int i = 0; i < 2; i++)  // todo: load more images
-	// - load multiple map images (oltre al DTM che a quel punto non si vedra')
-	// ofLoadImage(*tex_[0], "deagostini4096.jpg");
-	ofLoadImage(*tex_[0], "DTM.jpg");  // todo: caricare DTM che mi da' Sergio
-	tex_[0] -> readToPixels(pix_);  // av: elevation pixels
-
-	float pw = tex_[0] -> getWidth();
-	float ph = tex_[0] -> getHeight();
-
-	if (pw != IMAGE_SIZE_PIXEL || ph != IMAGE_SIZE_PIXEL)
+	float pw, ph;
+	for (int i = 0; i < IMAGE_COUNT; i++)
 	{
-		say("images must be 4096x4096. Exiting.");
-		std::exit(0);
-	}
+		ofTexture *t = new ofTexture();
+		tex_.push_back(t);
+		ofLoadImage(*tex_[i], to_string(i) + string(".jpg"));  // todo: caricare DTM che mi da' Sergio
+		if (i == 0)
+			tex_[i] -> readToPixels(pix_);  // av: elevation pixels
 
+		pw = tex_[i] -> getWidth();
+		ph = tex_[i] -> getHeight();
+
+		if (pw != IMAGE_SIZE_PIXEL || ph != IMAGE_SIZE_PIXEL)
+		{
+			say("all images must be 4096x4096. Exiting.");
+			say("image:", i);
+			std::exit(0);
+		}
+	}
 	mesh_ = make_shared<ofxMeshWarp>();
 	mesh_->setup(ofRectangle(ofGetScreenWidth()/2 - pw * IMAGE_SIZE_SCREEN / ph / 2.0,
 		                     ofGetScreenHeight()/2 - IMAGE_SIZE_SCREEN/2,
@@ -122,9 +124,9 @@ void ofApp::draw()
 	ofSetupScreen();
 	ofScale(X_SCALE, 1.0, 1.0);
 
-	tex_[0] -> bind();
+	tex_[image_number] -> bind();
 	controller_.drawFace();
-	tex_[0] -> unbind();
+	tex_[image_number] -> unbind();
 	if (show_controller_interface)
 		controller_.draw();
 
@@ -227,6 +229,11 @@ void ofApp::keyPressed(int key){
 	if(key == 'm')
 	{
 		show_controller_interface = ! show_controller_interface;
+	}
+
+	if(key == ' ')
+	{
+		image_number = (image_number + 1) % IMAGE_COUNT;
 	}
 
 	if (! has_been_reset)

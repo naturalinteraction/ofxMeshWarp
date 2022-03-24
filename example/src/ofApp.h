@@ -41,4 +41,5 @@ private:
 	bool should_reset;
 	bool should_load;
 	bool has_been_reset;
+	int image_number = 0;
 };

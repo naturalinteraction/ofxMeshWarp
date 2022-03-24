@@ -8,7 +8,7 @@ using namespace std;
 #define MESH_COLS  128
 #define MESH_ROWS  128
 
-#define X_SCALE    1.0
+#define X_SCALE    1.0  // 1.0 or 2.0 (== number of displays)  // todo: in XML?
 
 //--------------------------------------------------------------
 ofApp::ofApp(bool reset)

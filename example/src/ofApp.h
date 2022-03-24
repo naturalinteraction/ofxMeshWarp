@@ -40,4 +40,5 @@ private:
 	glm::vec2 my_translation;
 	bool should_reset;
 	bool should_load;
+	bool has_been_reset;
 };

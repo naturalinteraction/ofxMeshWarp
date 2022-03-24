@@ -1,3 +1,5 @@
+#include "ofxXmlSettings.h"
+
 #include "ofApp.h"
 #include "ofxMeshWarpIO.h"
 #include "say.h"
@@ -6,6 +8,8 @@ using namespace std;
 #define MESH_COLS  128
 #define MESH_ROWS  128
 #define MESH_WIDTH 1920.0
+
+#define X_SCALE    1.0
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -75,7 +79,7 @@ void ofApp::draw()
 
 	ofPushView();
 	ofViewport(viewport);
-	ofScale(2.0, 1.0, 1.0);
+	ofScale(X_SCALE, 1.0, 1.0);
 
 	tex_[0] -> bind();
 	controller_.drawFace();
@@ -90,7 +94,7 @@ void ofApp::draw()
     viewport.x = 1920;
 	ofPushView();
 	ofViewport(viewport);
-	ofScale(2.0, 1.0, 1.0);
+	ofScale(X_SCALE, 1.0, 1.0);
 
 	tex_[0] -> bind();
 	controller_.drawFace();
@@ -115,6 +119,18 @@ void ofApp::draw()
 	ofDrawBitmapStringHighlight(string("second display"), 1920 * 1.5, 1080 * 0.5);
 }
 
+void ofApp::loadValues()
+{
+    ofxXmlSettings XML;
+    if (! XML.loadFile("values.xml"))
+    {
+        whisper("could not load XML file. exit.");
+        std::exit(0);  // todo
+    }
+    my_rotation = XML.getValue("rotation", 0.0);
+    say(my_rotation);
+}
+
 void ofApp::loadDaMesh()
 {
 	printf("loaDaMesh - my_translation %f %f \n", my_translation.x, my_translation.y);
@@ -130,22 +146,30 @@ void ofApp::loadDaMesh()
 		say("nothing to load.");
 }
 
+void ofApp::saveValues()
+{
+	ofxXmlSettings XML;
+	XML.setValue("rotation", my_rotation);
+	XML.saveFile("values.xml");
+	say(my_rotation);
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
 	if(key == 'o')
 	{
+		loadDaMesh();
 		my_rotation -= 0.01;
 		say(my_rotation);
-		loadDaMesh();
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 		controller_.setRotation(my_rotation);
 	}
 	if(key == 'p')
 	{
+		loadDaMesh();
 		my_rotation += 0.01;
 		say(my_rotation);
-		loadDaMesh();
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 		controller_.setRotation(my_rotation);
 	}
@@ -220,14 +244,15 @@ void ofApp::keyPressed(int key){
 			ofxMeshWarpSave saver;
 			saver.addMesh(mesh_);
 			saver.save("mesh.sav");
+			saveValues();
 		}	break;
 		case 'L': {
 			loadDaMesh();
+			loadValues();
 			drama = 0.0;
 			my_scale = 0.0;
 			my_translation.x = 0.0;
 			my_translation.y = 0.0;
-			// todo my_rotation ?
 		}	break;
 	}
 }

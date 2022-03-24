@@ -10,6 +10,11 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+//	ofSetFrameRate(61);
+    ofSetVerticalSync(false);
+    ofEnableAntiAliasing();
+    ofEnableSmoothing();
+
 	int sw = ofGetScreenWidth();
 	int sh = ofGetScreenHeight();
 	say(ofGetScreenWidth());
@@ -65,11 +70,12 @@ void ofApp::draw()
     ofRectangle viewport;
     viewport.x = 0;
     viewport.y = 0;
-    viewport.width = 1920;  // 960
+    viewport.width = 1920;
     viewport.height = 1080;
 
 	ofPushView();
 	ofViewport(viewport);
+	ofScale(2.0, 1.0, 1.0);
 
 	tex_[0] -> bind();
 	controller_.drawFace();
@@ -77,22 +83,25 @@ void ofApp::draw()
 	if (show_controller_interface)
 		controller_.draw();
 
+	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
-/*
+
     // this will be needed to show the second half of the projection
-    viewport.x = 960;
+    viewport.x = 1920;
 	ofPushView();
 	ofViewport(viewport);
+	ofScale(2.0, 1.0, 1.0);
 
 	tex_[0] -> bind();
 	controller_.drawFace();
 	tex_[0] -> unbind();
-	if (show_controller_interface)
-		controller_.draw();
+	//if (show_controller_interface)
+	//	controller_.draw();
+
+	ofScale(1.0, 1.0, 1.0);
 
 	ofPopView();
-*/
 
 	string s = "\nw,s (scale) " + to_string(my_scale) + "\n";
 	s += "o,p (rotation) " + to_string(my_rotation) + "\n";
@@ -102,7 +111,9 @@ void ofApp::draw()
 	s += "L,S (load & save)\n";
 	s += "m (show/hide mesh)\n";
 	s += "fps " + to_string(ofGetFrameRate()) + "\n";
-	ofDrawBitmapStringHighlight(s, 100, 100);
+	ofDrawBitmapStringHighlight(s, 1800, 100);
+	ofDrawBitmapStringHighlight(string("first display"), 1920 * 0.5, 1080 * 0.5);
+	ofDrawBitmapStringHighlight(string("second display"), 1920 * 1.5, 1080 * 0.5);
 }
 
 void ofApp::loadDaMesh()

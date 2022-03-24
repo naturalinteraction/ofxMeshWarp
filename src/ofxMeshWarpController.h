@@ -6,6 +6,9 @@
 #include "ofPixels.h"
 #include "ofPolyline.h"
 
+#define IMAGE_SIZE_SCREEN	1920.0
+#define IMAGE_SIZE_PIXEL	4096.0
+
 namespace ofx{namespace MeshWarp{
 namespace Editor {
 	class PointHelper : public std::pair<MeshPoint*,MeshPoint> {

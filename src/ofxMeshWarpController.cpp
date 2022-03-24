@@ -6,9 +6,6 @@ using namespace ofx::MeshWarp;
 using namespace ofx::MeshWarp::Editor;
 using namespace std;
 
-#define IMAGE_SIZE_SCREEN	1920.0
-#define IMAGE_SIZE_PIXEL	4096.0
-
 float PROJECTION_WIDTH;
 float PROJECTION_HEIGHT;
 

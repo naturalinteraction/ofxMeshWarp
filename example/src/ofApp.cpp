@@ -7,13 +7,15 @@ using namespace std;
 
 #define MESH_COLS  128
 #define MESH_ROWS  128
-#define MESH_WIDTH 1920.0
 
 #define X_SCALE    1.0
 
 //--------------------------------------------------------------
 ofApp::ofApp(bool reset)
 {
+    say(IMAGE_SIZE_SCREEN);
+    say(IMAGE_SIZE_PIXEL);
+
 	say(reset);
 	should_reset = reset;
 	should_load = ! reset;
@@ -50,20 +52,25 @@ void ofApp::setup()
 	tex_.push_back(t);
 	//	for (int i = 0; i < 2; i++)  // todo: load more images
 
-	ofLoadImage(*tex_[0], "deagostini4096.jpg");
+	// ofLoadImage(*tex_[0], "deagostini4096.jpg");
+	ofLoadImage(*tex_[0], "DTM.jpg");
 	tex_[0] -> readToPixels(pix_);  // av: elevation pixels
 
 	float pw = tex_[0] -> getWidth();
 	float ph = tex_[0] -> getHeight();
 
 	mesh_ = make_shared<ofxMeshWarp>();
-	mesh_->setup(ofRectangle(ofGetScreenWidth()/2 - pw * MESH_WIDTH / ph / 2.0, ofGetScreenHeight()/2 - MESH_WIDTH/2, pw * MESH_WIDTH / ph, MESH_WIDTH), MESH_COLS, MESH_ROWS);
+	mesh_->setup(ofRectangle(ofGetScreenWidth()/2 - pw * IMAGE_SIZE_SCREEN / ph / 2.0,
+		                     ofGetScreenHeight()/2 - IMAGE_SIZE_SCREEN/2,
+		                     pw * IMAGE_SIZE_SCREEN / ph,
+		                     IMAGE_SIZE_SCREEN),
+	                         MESH_COLS, MESH_ROWS);
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
 	controller_.add(mesh_);
 	controller_.enable();
 	controller_.setElevationPixels(pix_);
-	controller_.setCenterOfProjection(4096 / 2.0, 4096 * 0.5);  // todo
+	controller_.setCenterOfProjection(IMAGE_SIZE_PIXEL * 0.5, IMAGE_SIZE_PIXEL * 0.5);
 }
 
 //--------------------------------------------------------------
@@ -98,8 +105,8 @@ void ofApp::draw()
     ofRectangle viewport;
     viewport.x = 0;
     viewport.y = 0;
-    viewport.width = 1920;
-    viewport.height = 1080;
+    viewport.width = IMAGE_SIZE_SCREEN;
+    viewport.height = IMAGE_SIZE_SCREEN * 9 / 16;
 
 	ofPushView();
 	ofViewport(viewport);
@@ -115,7 +122,7 @@ void ofApp::draw()
 	ofPopView();
 
     // this will be needed to show the second half of the projection
-    viewport.x = 1920;
+    viewport.x = IMAGE_SIZE_SCREEN;
 	ofPushView();
 	ofViewport(viewport);
 	ofScale(X_SCALE, 1.0, 1.0);
@@ -145,8 +152,8 @@ void ofApp::draw()
 		s += "fps " + to_string(ofGetFrameRate()) + "\n";
 	}
 	ofDrawBitmapStringHighlight(s, 1200, 100);
-	ofDrawBitmapStringHighlight(string("first display"), 1920 * 0.5, 1080 * 0.5);
-	ofDrawBitmapStringHighlight(string("second display"), 1920 * 1.5, 1080 * 0.5);
+	ofDrawBitmapStringHighlight(string("first display"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(string("second display"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }
 
 void ofApp::loadValues()
@@ -155,7 +162,7 @@ void ofApp::loadValues()
     if (! XML.loadFile("values.xml"))
     {
         whisper("could not load XML file. exit.");
-        std::exit(0);  // todo
+        std::exit(0);
     }
     my_rotation = XML.getValue("rotation", 0.0);
     say(my_rotation);
@@ -261,14 +268,14 @@ void ofApp::keyPressed(int key){
 
 	if(key == 'a')
 	{
-		drama -= 0.0001;
+		drama -= 0.00001;
 		printf("drama %f\n", drama);
 		loadDaMesh();
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
 	}
 	if(key == 'd')
 	{
-		drama += 0.0001;
+		drama += 0.00001;
 		printf("drama %f\n", drama);
 		loadDaMesh();
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);

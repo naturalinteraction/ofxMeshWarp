@@ -6,5 +6,5 @@ SECONDARIO
 - dopo aver fatto il load della mesh non si possono usare i tasti di calibrazione "drama"
 - modo per, all'avvio, resettare (ovvero fare un save()) invece di fare load(), per poter usare i tasti di calibrazione
 - load multiple map images (oltre al DTM che a quel punto non si vedra')
-- 2 viewports
+- 2 viewports o due applicazioni differenti (lista monitors, specifica monitor)
 - bande di crossfade tra le due mesh/viewport

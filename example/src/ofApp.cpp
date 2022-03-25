@@ -9,7 +9,7 @@ using namespace std;
 #define IMAGE_COUNT  4
 
 // todo: DTM allineato
-// todo: 2 controller separati nei due viewport
+// todo: 2 controller separati nei due viewport, tasti 1 e 2 per andare avanti e indietro, values0.xml e values1.xml...
 // todo: bande di crossfade tra le due mesh/viewport
 
 //--------------------------------------------------------------
@@ -162,9 +162,9 @@ void ofApp::draw()
 		s = "\nPLAYBACK MODE\nm (show/hide mesh)\n";
 		s += "fps " + to_string(ofGetFrameRate()) + "\n";
 	}
-	ofDrawBitmapStringHighlight(s, 1200, 100);
-	ofDrawBitmapStringHighlight(string("first display"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
-	ofDrawBitmapStringHighlight(string("second display"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(s, 0, 0);
+	ofDrawBitmapStringHighlight(string("display 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(string("display 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }
 
 void ofApp::loadValues()

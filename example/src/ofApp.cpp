@@ -5,7 +5,7 @@
 #include "say.h"
 using namespace std;
 
-#define MESH_ELEMENTS  128  // 256 looks better
+#define MESH_ELEMENTS  128  // todo: 256 looks better
 #define IMAGE_COUNT  4
 
 // todo: DTM allineato
@@ -154,12 +154,12 @@ void ofApp::draw()
 	s += "a,d (elevation factor) " + to_string(drama) + "\n";
 	s += "arrows (translation) " + to_string(my_translation.x) + " " + to_string(my_translation.y) + "\n";
 	s += "L,S (load & save)\n";
-	s += "m (show/hide mesh)\n";
+	s += "m (show/hide mesh)\nSPACE (next layer)\n";
 	s += "fps " + to_string(ofGetFrameRate()) + "\n";
 
 	if (! has_been_reset)
 	{
-		s = "\nPLAYBACK MODE\nm (show/hide mesh)\n";
+		s = "\nPLAYBACK MODE\nm (show/hide mesh)\nSPACE (next layer)\n";
 		s += "fps " + to_string(ofGetFrameRate()) + "\n";
 	}
 	ofDrawBitmapStringHighlight(s, 0, 0);

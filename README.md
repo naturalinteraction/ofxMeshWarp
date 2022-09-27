@@ -2,6 +2,12 @@
 Warping mesh points with mouse and keyboard.  
 You can do it by code, of course.
 
+# poll machine
+Password for bios and sudo is:
+```
+youmustfollowthewhiterabbit
+```
+
 ### elevation warping
 `w,s` scale up/down
 `q,z` center of projection up/down

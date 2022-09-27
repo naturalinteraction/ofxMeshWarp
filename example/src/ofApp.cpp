@@ -138,7 +138,7 @@ void ofApp::draw()
 	ofSetupScreen();
 	ofScale(x_scale, 1.0, 1.0);
 
-	tex_[0] -> bind();
+	tex_[0] -> bind();  // todo: will bind image_number
 	controller_.drawFace();
 	tex_[0] -> unbind();
 	// if (show_controller_interface)

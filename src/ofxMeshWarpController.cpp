@@ -209,6 +209,7 @@ void PointController::mouseReleased(ofMouseEventArgs &args)
 }
 void PointController::mouseMoved(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	glm::vec2 local = screenToLocal(args);
 	mouse_op_.pos = local;
 	mouse_op_.hover = getHit(local);
@@ -226,6 +227,7 @@ MeshPoint* PointController::getHit(const glm::vec2 &test) const
 
 void PointController::mouseDragged(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	glm::vec2 local = screenToLocal(args);
 	mouse_op_.pos = local;
 	if(isMakingRect()) {
@@ -443,6 +445,7 @@ void DivideController::mouseReleased(ofMouseEventArgs &args)
 }
 void DivideController::mouseMoved(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	glm::vec2 local = screenToLocal(args);
 	hit_info_ = getHitInfo(local);
 }

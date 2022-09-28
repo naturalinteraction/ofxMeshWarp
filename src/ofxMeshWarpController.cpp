@@ -131,6 +131,7 @@ bool PointController::isEditing() const
 }
 void PointController::mousePressed(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	glm::vec2 local = screenToLocal(args);
 	mouse_op_.pressed_pos = local;
 	mouse_op_.pressed_state = MouseOperation::STATE_NONE;
@@ -188,6 +189,7 @@ void PointController::mousePressed(ofMouseEventArgs &args)
 }
 void PointController::mouseReleased(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	glm::vec2 local = screenToLocal(args);
 	if(isMakingRect()) {
 		if(!isAlternative() && !isAdditive()) {
@@ -267,6 +269,7 @@ void PointController::mouseDragged(ofMouseEventArgs &args)
 }
 void PointController::mouseScrolled(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	float delta = args.scrollY*scroll_to_alpha_;
 	bool moved_any = false;
 	for(auto &p : selected_) {
@@ -413,6 +416,7 @@ bool DivideController::isEditing() const
 
 void DivideController::mousePressed(ofMouseEventArgs &args)
 {
+	return;  // av: ignore mouse movements entirely
 	glm::vec2 local = screenToLocal(args);
 	bool dirty = false;
 	if(isDivide()) {

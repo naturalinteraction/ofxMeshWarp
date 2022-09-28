@@ -3,7 +3,7 @@ Warping mesh points with mouse and keyboard.
 You can do it by code, of course.
 
 # poll machine
-Password for bios and sudo is:
+Password for teamviewer, bios and sudo is:
 ```
 youmustfollowthewhiterabbit
 ```

@@ -33,6 +33,13 @@ namespace Editor {
 		void mouseExited(ofMouseEventArgs &args);
 		void keyPressed(ofKeyEventArgs &args);
 		void keyReleased(ofKeyEventArgs &args);
+
+		float x_scale = 1.0;
+		float drama = 0.0;
+		float my_scale = 0.0;
+		float my_rotation = 0.0;
+		glm::vec2 my_translation;
+
 	private:
 		bool is_mover_active_ = false;
 		bool is_divider_active_ = false;

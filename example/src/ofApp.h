@@ -34,13 +34,8 @@ private:
 	vector <ofTexture *> tex_;
 	bool show_controller_interface = true;
 
-	float drama = 0.0;
-	float my_scale = 0.0;
-	float my_rotation = 0.0;
-	glm::vec2 my_translation;
 	bool should_reset;
 	bool should_load;
 	bool has_been_reset;
 	int image_number = 0;
-	float x_scale = 1.0;
 };

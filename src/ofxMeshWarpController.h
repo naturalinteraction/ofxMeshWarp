@@ -110,6 +110,7 @@ namespace Editor {
 		virtual void mouseExited(ofMouseEventArgs &args);
 		virtual void keyPressed(ofKeyEventArgs &args);
 		virtual void keyReleased(ofKeyEventArgs &args);
+
 	protected:
 		struct MouseOperation {
 			MeshPoint *hover = nullptr;

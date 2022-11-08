@@ -8,7 +8,6 @@ using namespace std;
 #define MESH_ELEMENTS  128  // todo: 256 looks better
 #define IMAGE_COUNT  4
 
-// todo: DTM allineato
 // todo: 2 controller separati nei due viewport, tasti 1 e 2 per andare avanti e indietro, values0.xml e values1.xml...
 // todo: bande di crossfade tra le due mesh/viewport
 
@@ -155,16 +154,20 @@ void ofApp::draw()
 	s += "arrows (translation) " + to_string(my_translation.x) + " " + to_string(my_translation.y) + "\n";
 	s += "L,S (load & save)\n";
 	s += "m (show/hide mesh)\nSPACE (next layer)\n";
+	s += "1 (load defaults for display 1)\n";
+	s += "2 (load defaults for display 2)\n";
 	s += "fps " + to_string(ofGetFrameRate()) + "\n";
+	s += "naturalinteract@gmail.com";
 
 	if (! has_been_reset)
 	{
 		s = "\nPLAYBACK MODE\nm (show/hide mesh)\nSPACE (next layer)\n";
 		s += "fps " + to_string(ofGetFrameRate()) + "\n";
+		s += "naturalinteract@gmail.com";
 	}
 	ofDrawBitmapStringHighlight(s, 0, 0);
-	ofDrawBitmapStringHighlight(string("display 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
-	ofDrawBitmapStringHighlight(string("display 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }
 
 void ofApp::loadValues()
@@ -258,16 +261,23 @@ void ofApp::keyPressed(int key){
 		controller_.setRotation(my_rotation);
 	}
 
-	// good values for display 1
+	// default values for display 1
 	if (key == '1')
 	{
+		my_scale = 0.0025;
 		controller_.setCenterOfProjection(controller_.center_of_projection.x, 3088);
-		my_translation.x = 0;
+		my_translation.x = 3;
 		my_translation.y = 552;
 		printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
 		printf("my_translation %f %f \n", my_translation.x, my_translation.y);
 		loadDaMesh();
 		controller_.elevationWarp(my_translation, my_scale, drama, my_rotation);
+	}
+
+	// default values for display 2
+	if (key == '2')
+	{
+		say("todo");
 	}
 
 	if(key == 'q')

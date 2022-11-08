@@ -8,7 +8,6 @@ using namespace std;
 #define MESH_ELEMENTS  128  // todo: 256 looks better
 #define IMAGE_COUNT  4
 
-// todo: values0.xml e values1.xml...
 // todo: bande di crossfade tra le due mesh/viewport
 
 //--------------------------------------------------------------
@@ -95,7 +94,8 @@ void ofApp::update()
 	{
 		should_reset = false;
 		say("initial save");
-		saveValues();
+		saveValues(controller1, "values1.xml");
+		saveValues(controller2, "values2.xml");
 		saveDaMesh();
 		say("done");
 	}
@@ -103,8 +103,8 @@ void ofApp::update()
 	{
 		say("initial load");
 		should_load = false;
-		loadValues(controller1);
-		loadValues(controller2);
+		loadValues(controller1, "values1.xml");
+		loadValues(controller2, "values2.xml");
 		say("done");
 	}
 	mesh_->update();
@@ -178,14 +178,21 @@ void ofApp::draw()
 	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }
 
-void ofApp::loadValues(ofxMeshWarpController &controller_)
+void ofApp::loadValues(ofxMeshWarpController &controller_, string filename)
 {
     ofxXmlSettings XML;
-    if (! XML.loadFile("values.xml"))
+    if (! XML.loadFile(filename))
     {
         whisper("could not load XML file. exit.");
         std::exit(0);
     }
+
+    controller_.my_translation.x = XML.getValue("my_translation_x", 0.0);
+    controller_.my_translation.y = XML.getValue("my_translation_y", 0.0);
+
+    controller_.my_scale = XML.getValue("my_scale", 0.0);
+    controller_.drama = XML.getValue("drama", 0.0);
+
     controller_.my_rotation = XML.getValue("rotation", 0.0);
     say(controller_.my_rotation);
     controller_.setRotation(controller_.my_rotation);
@@ -207,28 +214,30 @@ void ofApp::loadDaMesh(ofxMeshWarpController &controller_)
 	printf("loaDaMesh - my_translation %f %f \n", controller_.my_translation.x, controller_.my_translation.y);
 
 	ofxMeshWarpLoad loader;
-	vector<shared_ptr<ofxMeshWarp>> result = loader.load("mesh.sav");
+	vector<shared_ptr<ofxMeshWarp>> result = loader.load("mesh.sav");  // todo
 	say("loaded");
 	if(!result.empty()) {
 		controller_.clear();
 		mesh_ = result[0];
-		controller_.add(mesh_);
+		controller_.add(result[0]);
 		say("added");
 	}
 	else
 		say("nothing to load.");
 }
 
-void ofApp::saveValues()
+void ofApp::saveValues(ofxMeshWarpController &controller_, string filename)
 {
-	ofxMeshWarpController &controller_ = controller1;  // todo
-
 	ofxXmlSettings XML;
+	XML.setValue("my_translation_x", controller_.my_translation.x);
+	XML.setValue("my_translation_y", controller_.my_translation.y);
+	XML.setValue("drama", controller_.drama);
+	XML.setValue("my_scale", controller_.my_scale);
 	XML.setValue("rotation", controller_.my_rotation);
 	XML.setValue("x_scale", 1.0);
 	XML.setValue("center_of_projection_x", controller_.center_of_projection.x);
 	XML.setValue("center_of_projection_y", controller_.center_of_projection.y);
-	XML.saveFile("values.xml");
+	XML.saveFile(filename);
 }
 
 void ofApp::saveDaMesh()  // todo
@@ -363,16 +372,14 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	if(key == 'S')
 	{
 		saveDaMesh();
-		saveValues();
+		saveValues(controller1, "values1.xml");
+		saveValues(controller2, "values2.xml");
 		has_been_reset = false;
 	}
 	if(key == 'L')
 	{
-		loadValues(controller_);
-		controller_.drama = 0.0;
-		controller_.my_scale = 0.0;
-		controller_.my_translation.x = 0.0;
-		controller_.my_translation.y = 0.0;
+		loadValues(controller1, "values1.xml");
+		loadValues(controller2, "values2.xml");
 	}
 }
 

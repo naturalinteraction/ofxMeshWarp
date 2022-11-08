@@ -11,8 +11,8 @@ public:
 	void setup();
 	void update();
 	void draw();
-	void loadValues(ofxMeshWarpController &controller_);
-	void saveValues();
+	void loadValues(ofxMeshWarpController &controller_, string filename);
+	void saveValues(ofxMeshWarpController &controller_, string filename);
 	void keyPressed(int key);
 	void keyPressedForController(int key, ofxMeshWarpController &controller_);
 	void keyReleased(int key);
@@ -30,6 +30,7 @@ public:
 	void saveDaMesh();
 
 private:
+
 	std::shared_ptr<ofxMeshWarp> mesh_;
 	ofxMeshWarpController controller1;
 	ofxMeshWarpController controller2;

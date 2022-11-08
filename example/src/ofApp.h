@@ -11,9 +11,10 @@ public:
 	void setup();
 	void update();
 	void draw();
-	void loadValues();
+	void loadValues(ofxMeshWarpController &controller_);
 	void saveValues();
 	void keyPressed(int key);
+	void keyPressedForController(int key, ofxMeshWarpController &controller_);
 	void keyReleased(int key);
 	void mouseMoved(int x, int y );
 	void mouseDragged(int x, int y, int button);
@@ -25,12 +26,13 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	void loadDaMesh();
+	void loadDaMesh(ofxMeshWarpController &controller_);
 	void saveDaMesh();
 
 private:
 	std::shared_ptr<ofxMeshWarp> mesh_;
-	ofxMeshWarpController controller_;
+	ofxMeshWarpController controller1;
+	ofxMeshWarpController controller2;
 	vector <ofTexture *> tex_;
 	bool show_controller_interface = true;
 
@@ -38,4 +40,5 @@ private:
 	bool should_load;
 	bool has_been_reset;
 	int image_number = 0;
+	bool first_display = true;
 };

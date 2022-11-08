@@ -26,6 +26,8 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	string generateString(ofxMeshWarpController &controller_);
+
 	void loadDaMesh(ofxMeshWarpController &controller_);
 	void saveDaMesh();
 

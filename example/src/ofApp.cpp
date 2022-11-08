@@ -124,6 +124,32 @@ void ofApp::update()
 	mesh_->update();
 }
 
+string ofApp::generateString(ofxMeshWarpController &controller_)
+{
+	string s = "\nSETUP MODE\nw,s (scale) " + to_string(controller_.my_scale) + "\n";
+	s += "o,p (rotation) " + to_string(controller_.my_rotation) + "\n";
+	s += "q,z (center of projection) " + to_string(controller_.center_of_projection.y) + "\n";
+	s += "a,d (elevation factor) " + to_string(controller_.drama) + "\n";
+	s += "arrows (translation) " + to_string(controller_.my_translation.x) + " " + to_string(controller_.my_translation.y) + "\n";
+	s += "S (save)\n";
+	s += "m (show/hide mesh)\nSPACE (next layer)\n";
+	s += "1 (load defaults for display 1)\n";
+	s += "2 (load defaults for display 2)\n";
+	s += "TAB (toggle editing display)\n";
+	s += "editing display #" + to_string(2 - (int)first_display);
+	s += "fps " + to_string(ofGetFrameRate()) + "\n";
+	s += "naturalinteract@gmail.com";
+
+	if (! has_been_reset)
+	{
+		s = "\nPLAYBACK MODE\nm (show/hide mesh)\nSPACE (next layer)\n";
+		s += "fps " + to_string(ofGetFrameRate()) + "\n";
+		s += "naturalinteract@gmail.com";
+	}
+
+	return s;
+}
+
 //--------------------------------------------------------------
 void ofApp::draw()
 {
@@ -167,27 +193,15 @@ void ofApp::draw()
 
 	ofPopView();
 
-	ofxMeshWarpController &controller_ = controller1;  // todo
+	string s;
 
-	string s = "\nSETUP MODE\nw,s (scale) " + to_string(controller_.my_scale) + "\n";
-	s += "o,p (rotation) " + to_string(controller_.my_rotation) + "\n";
-	s += "q,z (center of projection) " + to_string(controller_.center_of_projection.y) + "\n";
-	s += "a,d (elevation factor) " + to_string(controller_.drama) + "\n";
-	s += "arrows (translation) " + to_string(controller_.my_translation.x) + " " + to_string(controller_.my_translation.y) + "\n";
-	s += "L,S (load & save)\n";
-	s += "m (show/hide mesh)\nSPACE (next layer)\n";
-	s += "1 (load defaults for display 1)\n";
-	s += "2 (load defaults for display 2)\n";
-	s += "fps " + to_string(ofGetFrameRate()) + "\n";
-	s += "naturalinteract@gmail.com";
+	if (first_display)
+		s = generateString(controller1);
+	else
+		s = generateString(controller2);
 
-	if (! has_been_reset)
-	{
-		s = "\nPLAYBACK MODE\nm (show/hide mesh)\nSPACE (next layer)\n";
-		s += "fps " + to_string(ofGetFrameRate()) + "\n";
-		s += "naturalinteract@gmail.com";
-	}
 	ofDrawBitmapStringHighlight(s, 0, 0);
+	ofDrawBitmapStringHighlight(s, IMAGE_SIZE_SCREEN/2, 0);
 	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }
@@ -303,14 +317,14 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	// default values for display 1
 	if (key == '1')
 	{
-		controller_.my_scale = 0.0025;
-		controller_.setCenterOfProjection(controller_.center_of_projection.x, 3088);
-		controller_.my_translation.x = 3;
-		controller_.my_translation.y = 552;
-		printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
-		printf("my_translation %f %f \n", controller_.my_translation.x, controller_.my_translation.y);
-		loadDaMesh(controller_);
-		controller_.elevationWarp(controller_.my_translation, controller_.my_scale, controller_.drama, controller_.my_rotation);
+		controller1.my_scale = 0.0025;
+		controller1.setCenterOfProjection(controller1.center_of_projection.x, 3088);
+		controller1.my_translation.x = 3;
+		controller1.my_translation.y = 552;
+		printf("cop %f %f\n", controller1.center_of_projection.x, controller1.center_of_projection.y);
+		printf("my_translation %f %f \n", controller1.my_translation.x, controller1.my_translation.y);
+		loadDaMesh(controller1);
+		controller1.elevationWarp(controller1.my_translation, controller1.my_scale, controller1.drama, controller1.my_rotation);
 	}
 
 	// default values for display 2

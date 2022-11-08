@@ -39,6 +39,7 @@ private:
 
 	bool should_reset;
 	bool should_load;
+	int load_count;
 	bool has_been_reset;
 	int image_number = 0;
 	bool first_display = true;

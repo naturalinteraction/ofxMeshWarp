@@ -19,6 +19,7 @@ ofApp::ofApp(bool reset)
 	say(reset);
 	should_reset = reset;
 	should_load = ! reset;
+	load_count = 10;
 	has_been_reset = reset;
 }
 
@@ -99,12 +100,25 @@ void ofApp::update()
 		saveDaMesh();
 		say("done");
 	}
+	load_count--;
+	if (load_count == 0)
+	{
+		say("initial load #2");
+
+		loadValues(controller2, "values2.xml");
+		loadDaMesh(controller2);
+		controller2.elevationWarp(controller2.my_translation, controller2.my_scale, controller2.drama, controller2.my_rotation);
+
+		say("done");
+	}
 	if (should_load)
 	{
 		say("initial load");
 		should_load = false;
+
 		loadValues(controller1, "values1.xml");
-		loadValues(controller2, "values2.xml");
+		controller1.elevationWarp(controller1.my_translation, controller1.my_scale, controller1.drama, controller1.my_rotation);
+
 		say("done");
 	}
 	mesh_->update();
@@ -202,8 +216,6 @@ void ofApp::loadValues(ofxMeshWarpController &controller_, string filename)
     say(copx, copy);
     controller_.setCenterOfProjection(copx, copy);
 	printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
-	loadDaMesh(controller_);
-	controller_.elevationWarp(controller_.my_translation, controller_.my_scale, controller_.drama, controller_.my_rotation);
 
 	controller_.x_scale = XML.getValue("x_scale", 1.0);
     say(controller_.x_scale);
@@ -214,7 +226,7 @@ void ofApp::loadDaMesh(ofxMeshWarpController &controller_)
 	printf("loaDaMesh - my_translation %f %f \n", controller_.my_translation.x, controller_.my_translation.y);
 
 	ofxMeshWarpLoad loader;
-	vector<shared_ptr<ofxMeshWarp>> result = loader.load("mesh.sav");  // todo
+	vector<shared_ptr<ofxMeshWarp>> result = loader.load("mesh.sav");
 	say("loaded");
 	if(!result.empty()) {
 		controller_.clear();
@@ -240,7 +252,7 @@ void ofApp::saveValues(ofxMeshWarpController &controller_, string filename)
 	XML.saveFile(filename);
 }
 
-void ofApp::saveDaMesh()  // todo
+void ofApp::saveDaMesh()
 {
 	ofxMeshWarpSave saver;
 	saver.addMesh(mesh_);
@@ -371,15 +383,22 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	}
 	if(key == 'S')
 	{
-		saveDaMesh();
+		// saveDaMesh();
 		saveValues(controller1, "values1.xml");
 		saveValues(controller2, "values2.xml");
 		has_been_reset = false;
 	}
-	if(key == 'L')
+	if (key == 'K')
+	{
+		loadValues(controller2, "values2.xml");
+		loadDaMesh(controller2);
+		controller2.elevationWarp(controller2.my_translation, controller2.my_scale, controller2.drama, controller2.my_rotation);
+	}
+	if (key == 'L')
 	{
 		loadValues(controller1, "values1.xml");
-		loadValues(controller2, "values2.xml");
+		loadDaMesh(controller1);
+		controller1.elevationWarp(controller1.my_translation, controller1.my_scale, controller1.drama, controller1.my_rotation);
 	}
 }
 

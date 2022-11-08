@@ -328,8 +328,8 @@ void PointController::elevationWarp(glm::vec2 my_translation, float my_scale, fl
 			float elevation = 0.0;
 			if (ibx < 0 || iby < 0 || ibx >= IMAGE_SIZE_PIXEL || iby >= IMAGE_SIZE_PIXEL)
 			{
-				printf("PJW %f PJH %f ISS %f\n", PROJECTION_WIDTH, PROJECTION_HEIGHT, IMAGE_SIZE_SCREEN);
-				printf("ibxy %d %d isp%f\n", ibx, iby, IMAGE_SIZE_PIXEL);
+				// printf("PJW %f PJH %f ISS %f\n", PROJECTION_WIDTH, PROJECTION_HEIGHT, IMAGE_SIZE_SCREEN);
+				// printf("ibxy %d %d isp%f\n", ibx, iby, IMAGE_SIZE_PIXEL);
 				// elevation = pixels[3 * (iby * IMAGE_SIZE_PIXEL + ibx)];
 				// printf("wrong elev %f\n", elevation);
 			}

@@ -21,6 +21,7 @@ ofApp::ofApp(bool reset)
 	should_load = ! reset;
 	load_count = 10;
 	has_been_reset = reset;
+	gradient.load("gradient1.png");
 }
 
 void ofApp::setup()
@@ -101,7 +102,7 @@ void ofApp::update()
 		say("done");
 	}
 	load_count--;
-	if (load_count == 0)
+	if (load_count == 0 && ! has_been_reset)
 	{
 		say("initial load #2");
 
@@ -159,8 +160,8 @@ void ofApp::draw()
     ofRectangle viewport;
     viewport.x = 0;
     viewport.y = 0;
-    viewport.width = IMAGE_SIZE_SCREEN/2;
-    viewport.height = IMAGE_SIZE_SCREEN * 9 / 16/2;
+    viewport.width = IMAGE_SIZE_SCREEN;
+    viewport.height = IMAGE_SIZE_SCREEN * 9 / 16;
 
 	ofPushView();
 	ofViewport(viewport);
@@ -176,8 +177,11 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
+	float FRACT = 0.05;
+	gradient.draw(IMAGE_SIZE_SCREEN * 0.25, IMAGE_SIZE_SCREEN * 9 / 16 * (1.0 - FRACT), IMAGE_SIZE_SCREEN * 0.50, IMAGE_SIZE_SCREEN * 9 / 16 * FRACT);
+
     // this will be needed to show the second half of the projection
-    viewport.x = IMAGE_SIZE_SCREEN/2;
+    viewport.x = IMAGE_SIZE_SCREEN;
 	ofPushView();
 	ofViewport(viewport);
 	ofSetupScreen();
@@ -201,7 +205,7 @@ void ofApp::draw()
 		s = generateString(controller2);
 
 	ofDrawBitmapStringHighlight(s, 0, 0);
-	ofDrawBitmapStringHighlight(s, IMAGE_SIZE_SCREEN/2, 0);
+	ofDrawBitmapStringHighlight(s, IMAGE_SIZE_SCREEN, 0);
 	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }

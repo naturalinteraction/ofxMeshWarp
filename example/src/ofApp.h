@@ -30,7 +30,8 @@ public:
 
 private:
 	std::shared_ptr<ofxMeshWarp> mesh_;
-	ofxMeshWarpController controller_;
+	ofxMeshWarpController controller1;
+	ofxMeshWarpController controller2;
 	vector <ofTexture *> tex_;
 	bool show_controller_interface = true;
 
@@ -38,4 +39,6 @@ private:
 	bool should_load;
 	bool has_been_reset;
 	int image_number = 0;
+
+	bool first_display = true;
 };

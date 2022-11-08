@@ -8,7 +8,7 @@ using namespace std;
 #define MESH_ELEMENTS  128  // todo: 256 looks better
 #define IMAGE_COUNT  4
 
-// todo: 2 controller separati nei due viewport, tasti 1 e 2 per andare avanti e indietro, values0.xml e values1.xml...
+// todo: values0.xml e values1.xml...
 // todo: bande di crossfade tra le due mesh/viewport
 
 //--------------------------------------------------------------
@@ -75,6 +75,16 @@ void ofApp::setup()
 	                         MESH_ELEMENTS, MESH_ELEMENTS);
 	mesh_->setUVRect(ofRectangle(0, 0, pw, ph));
 	printf("%f %f\n", pw, ph);
+
+	ofxMeshWarpController &controller_ = controller1;
+
+	controller_.add(mesh_);
+	controller_.enable();
+	controller_.setElevationPixels(pix_);
+	controller_.setCenterOfProjection(IMAGE_SIZE_PIXEL * 0.5, IMAGE_SIZE_PIXEL * 0.5);
+
+	controller_ = controller2;
+
 	controller_.add(mesh_);
 	controller_.enable();
 	controller_.setElevationPixels(pix_);
@@ -119,6 +129,9 @@ void ofApp::draw()
 	ofPushView();
 	ofViewport(viewport);
 	ofSetupScreen();
+
+	ofxMeshWarpController &controller_ = controller1;
+
 	ofScale(controller_.x_scale, 1.0, 1.0);
 
 	tex_[image_number] -> bind();
@@ -130,7 +143,8 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
-    // this will be needed to show the second half of the projection
+    // to show the second half of the projection
+    //controller_ = controller2;
     viewport.x = IMAGE_SIZE_SCREEN;
 	ofPushView();
 	ofViewport(viewport);
@@ -144,8 +158,10 @@ void ofApp::draw()
 		controller_.draw();
 
 	ofScale(1.0, 1.0, 1.0);
-
 	ofPopView();
+
+	if (first_display)
+		controller_ = controller1;
 
 	string s = "\nSETUP MODE\nw,s (scale) " + to_string(controller_.my_scale) + "\n";
 	s += "o,p (rotation) " + to_string(controller_.my_rotation) + "\n";
@@ -157,6 +173,8 @@ void ofApp::draw()
 	s += "1 (load defaults for display 1)\n";
 	s += "2 (load defaults for display 2)\n";
 	s += "fps " + to_string(ofGetFrameRate()) + "\n";
+	s += "TAB (switch display)\n";
+	s += "display " + to_string(2 - (int)(first_display)) + "\n";
 	s += "naturalinteract@gmail.com";
 
 	if (! has_been_reset)
@@ -178,6 +196,9 @@ void ofApp::loadValues()
         whisper("could not load XML file. exit.");
         std::exit(0);
     }
+
+	ofxMeshWarpController &controller_ = controller1;
+
     controller_.my_rotation = XML.getValue("rotation", 0.0);
     say(controller_.my_rotation);
     controller_.setRotation(controller_.my_rotation);
@@ -192,10 +213,31 @@ void ofApp::loadValues()
 
 	controller_.x_scale = XML.getValue("x_scale", 1.0);
     say(controller_.x_scale);
+
+	controller_ = controller2;
+
+    controller_.my_rotation = XML.getValue("rotation", 0.0);
+    say(controller_.my_rotation);
+    controller_.setRotation(controller_.my_rotation);
+
+    copx = XML.getValue("center_of_projection_x", 0.0);
+    copy = XML.getValue("center_of_projection_y", 0.0);
+    say(copx, copy);
+    controller_.setCenterOfProjection(copx, copy);
+	printf("cop %f %f\n", controller_.center_of_projection.x, controller_.center_of_projection.y);
+	loadDaMesh();
+	controller_.elevationWarp(controller_.my_translation, controller_.my_scale, controller_.drama, controller_.my_rotation);
+
+	controller_.x_scale = XML.getValue("x_scale", 1.0);
+    say(controller_.x_scale);
  }
 
 void ofApp::loadDaMesh()
 {
+	ofxMeshWarpController &controller_ = controller1;
+	if (first_display == false)
+		controller_ = controller2;
+
 	printf("loaDaMesh - my_translation %f %f \n", controller_.my_translation.x, controller_.my_translation.y);
 
 	ofxMeshWarpLoad loader;
@@ -213,6 +255,10 @@ void ofApp::loadDaMesh()
 
 void ofApp::saveValues()
 {
+	ofxMeshWarpController &controller_ = controller1;
+	if (first_display == false)
+		controller_ = controller2;
+
 	ofxXmlSettings XML;
 	XML.setValue("rotation", controller_.my_rotation);
 	XML.setValue("x_scale", 1.0);
@@ -230,6 +276,10 @@ void ofApp::saveDaMesh()
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+
+	ofxMeshWarpController &controller_ = controller1;
+	if (first_display == false)
+		controller_ = controller2;
 
 	if(key == 'm')
 	{
@@ -322,6 +372,11 @@ void ofApp::keyPressed(int key){
 		printf("drama %f\n", controller_.drama);
 		loadDaMesh();
 		controller_.elevationWarp(controller_.my_translation, controller_.my_scale, controller_.drama, controller_.my_rotation);
+	}
+	if (key == 9)  // tab
+	{
+		first_display = ! first_display;
+		say(first_display);
 	}
     glm::vec2 delta;
 	switch(key) {

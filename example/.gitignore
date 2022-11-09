@@ -4,3 +4,4 @@ bin/data/*.xml
 bin/example_debug
 bin/*.so
 poll_environment.zip
+bin/plastico

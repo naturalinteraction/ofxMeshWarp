@@ -1,10 +1,5 @@
-Per impostare la trasformazione (SETUP MODE), lanciare "bin/example reset".
-Una volta salvata resta quella fino ad un nuovo reset, e viene caricata dal PLAYBACK MODE ("bin/example").
+Per impostare la trasformazione (SETUP MODE), lanciare "bin/plastico reset".
+Una volta salvata resta quella fino ad un nuovo reset, e viene caricata dal PLAYBACK MODE ("bin/plastico").
 La prima cosa da fissare e' il centro di proiezione (q,z) che e' indipendente dalle altre trasformazioni.
 Le rotazioni sono intese essere MINIME (1 grado, roba cosi').
-
-In ../src/ofxMeshWarpController.h sono definite le dimensioni schermo e le dimensioni delle immagini, adesso:
-
-#define IMAGE_SIZE_SCREEN   1920.0 (si assume un rapporto 16:9)
-#define IMAGE_SIZE_PIXEL    4096.0 (quadrate)
-
+Vedi legenda in alto a destra.

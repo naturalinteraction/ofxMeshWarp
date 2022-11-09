@@ -136,7 +136,7 @@ string ofApp::generateString(ofxMeshWarpController &controller_)
 	s += "1 (load defaults for display 1)\n";
 	s += "2 (load defaults for display 2)\n";
 	s += "TAB (toggle editing display)\n";
-	s += "editing display #" + to_string(2 - (int)first_display);
+	s += "editing display #" + to_string(2 - (int)first_display) + "\n";
 	s += "fps " + to_string(ofGetFrameRate()) + "\n";
 	s += "naturalinteract@gmail.com";
 
@@ -206,8 +206,8 @@ void ofApp::draw()
 
 	ofDrawBitmapStringHighlight(s, 0, 0);
 	ofDrawBitmapStringHighlight(s, IMAGE_SIZE_SCREEN, 0);
-	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
-	ofDrawBitmapStringHighlight(string("naturalinteract@gmail.com - DISPLAY 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(string("DEMO naturalinteract@gmail.com - this is DISPLAY 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
+	ofDrawBitmapStringHighlight(string("DEMO naturalinteract@gmail.com - this is DISPLAY 2"), IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);
 }
 
 void ofApp::loadValues(ofxMeshWarpController &controller_, string filename)

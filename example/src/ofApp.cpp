@@ -8,9 +8,6 @@ using namespace std;
 #define MESH_ELEMENTS  128  // todo: 256 looks better
 #define IMAGE_COUNT  4
 
-// todo: bande di crossfade tra le due mesh/viewport
-
-//--------------------------------------------------------------
 ofApp::ofApp(bool reset)
 {
     say(IMAGE_SIZE_SCREEN);
@@ -22,6 +19,7 @@ ofApp::ofApp(bool reset)
 	load_count = 10;
 	has_been_reset = reset;
 	gradient.load("gradient1.png");
+	gradient_reversed.load("gradient1reversed.png");
 }
 
 void ofApp::setup()
@@ -131,6 +129,7 @@ string ofApp::generateString(ofxMeshWarpController &controller_)
 	s += "o,p (rotation) " + to_string(controller_.my_rotation) + "\n";
 	s += "q,z (center of projection) " + to_string(controller_.center_of_projection.y) + "\n";
 	s += "a,d (elevation factor) " + to_string(controller_.drama) + "\n";
+	s += "r,f (gradient extension) " + to_string(gradient_fract) + "\n";
 	s += "arrows (translation) " + to_string(controller_.my_translation.x) + " " + to_string(controller_.my_translation.y) + "\n";
 	s += "S (save)\n";
 	s += "m (show/hide mesh)\nSPACE (next layer)\n";
@@ -177,8 +176,7 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
-	float FRACT = 0.05;
-	gradient.draw(IMAGE_SIZE_SCREEN * 0.25, IMAGE_SIZE_SCREEN * 9 / 16 * (1.0 - FRACT), IMAGE_SIZE_SCREEN * 0.50, IMAGE_SIZE_SCREEN * 9 / 16 * FRACT);
+	gradient.draw(IMAGE_SIZE_SCREEN * 0.25, IMAGE_SIZE_SCREEN * 9 / 16 * (1.0 - gradient_fract), IMAGE_SIZE_SCREEN * 0.50, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
 
     // this will be needed to show the second half of the projection
     viewport.x = IMAGE_SIZE_SCREEN;
@@ -196,6 +194,8 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 
 	ofPopView();
+
+	gradient_reversed.draw(IMAGE_SIZE_SCREEN * 1.25, 0, IMAGE_SIZE_SCREEN * 0.50, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
 
 	string s;
 
@@ -301,6 +301,20 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	if (! has_been_reset)
 		return;
 
+	if(key == 'r')
+	{
+		gradient_fract += 0.001;
+		if (gradient_fract < 0)
+			gradient_fract = 0;
+	}
+	
+	if(key == 'f')
+	{
+		gradient_fract -= 0.001;
+		if (gradient_fract < 0)
+			gradient_fract = 0;
+	}
+	
 	if(key == 'o')
 	{
 		loadDaMesh(controller_);
@@ -325,6 +339,7 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 		controller1.setCenterOfProjection(controller1.center_of_projection.x, 3088);
 		controller1.my_translation.x = 3;
 		controller1.my_translation.y = 552;
+		controller1.drama = 0.00004;
 		printf("cop %f %f\n", controller1.center_of_projection.x, controller1.center_of_projection.y);
 		printf("my_translation %f %f \n", controller1.my_translation.x, controller1.my_translation.y);
 		loadDaMesh(controller1);
@@ -334,7 +349,15 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	// default values for display 2
 	if (key == '2')
 	{
-		say("todo");
+		controller2.my_scale = 0.0025;
+		controller2.setCenterOfProjection(controller2.center_of_projection.x, 1058);
+		controller2.my_translation.x = 0;
+		controller2.my_translation.y = -408;
+		controller2.drama = 0.00004;
+		printf("cop %f %f\n", controller2.center_of_projection.x, controller2.center_of_projection.y);
+		printf("my_translation %f %f \n", controller2.my_translation.x, controller2.my_translation.y);
+		loadDaMesh(controller2);
+		controller2.elevationWarp(controller2.my_translation, controller2.my_scale, controller2.drama, controller2.my_rotation);
 	}
 
 	if (key == 9)  // tab

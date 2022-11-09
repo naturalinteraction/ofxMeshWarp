@@ -5,7 +5,7 @@
 #include "say.h"
 using namespace std;
 
-#define MESH_ELEMENTS  128  // todo: 256 looks better
+#define MESH_ELEMENTS  256  // todo: 256 looks better, 128 is faster and tested
 #define IMAGE_COUNT  4
 
 ofApp::ofApp(bool reset)

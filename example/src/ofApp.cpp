@@ -219,6 +219,8 @@ void ofApp::loadValues(ofxMeshWarpController &controller_, string filename)
         std::exit(0);
     }
 
+    gradient_fract = XML.getValue("gradient_fract", 0.0);
+
     controller_.my_translation.x = XML.getValue("my_translation_x", 0.0);
     controller_.my_translation.y = XML.getValue("my_translation_y", 0.0);
 
@@ -259,6 +261,7 @@ void ofApp::loadDaMesh(ofxMeshWarpController &controller_)
 void ofApp::saveValues(ofxMeshWarpController &controller_, string filename)
 {
 	ofxXmlSettings XML;
+	XML.setValue("gradient_fract", gradient_fract);
 	XML.setValue("my_translation_x", controller_.my_translation.x);
 	XML.setValue("my_translation_y", controller_.my_translation.y);
 	XML.setValue("drama", controller_.drama);

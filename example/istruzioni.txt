@@ -1,5 +1,7 @@
 Per impostare la trasformazione (SETUP MODE), lanciare "bin/plastico reset".
-Una volta salvata resta quella fino ad un nuovo reset, e viene caricata dal PLAYBACK MODE ("bin/plastico").
 La prima cosa da fissare e' il centro di proiezione (q,z) che e' indipendente dalle altre trasformazioni.
 Le rotazioni sono intese essere MINIME (1 grado, roba cosi').
-Vedi legenda in alto a destra.
+Vedi legenda in alto a sinistra.
+S per salvare.
+Una volta salvata resta quella fino ad un nuovo reset, e viene caricata dal PLAYBACK MODE ("bin/plastico").
+In PLAYBACK MODE premere i tasti a,b,c,d... per saltare alle varie immagini.

@@ -6,7 +6,8 @@
 using namespace std;
 
 #define MESH_ELEMENTS  256  // todo: 256 looks better, 128 is faster and tested
-#define IMAGE_COUNT  4
+#define MAX_IMAGE_COUNT  20
+int IMAGE_COUNT = 0;
 
 ofApp::ofApp(bool reset)
 {
@@ -48,8 +49,14 @@ void ofApp::setup()
 
 	ofPixels pix_;
 	float pw, ph;
-	for (int i = 0; i < IMAGE_COUNT; i++)
+	for (int i = 0; i < MAX_IMAGE_COUNT; i++)
 	{
+		string filename = "bin/data/" + to_string(i) + ".jpg";
+		FILE *test = fopen(filename.c_str(), "rb");
+		if (! test)
+			continue;
+		fclose(test);
+		IMAGE_COUNT++;
 		ofTexture *t = new ofTexture();
 		tex_.push_back(t);
 		ofLoadImage(*tex_[i], to_string(i) + string(".jpg"));
@@ -84,6 +91,8 @@ void ofApp::setup()
 	// controller2.enable();
 	controller2.setElevationPixels(pix_);
 	controller2.setCenterOfProjection(IMAGE_SIZE_PIXEL * 0.5, IMAGE_SIZE_PIXEL * 0.5);
+
+	say(IMAGE_COUNT);
 }
 
 //--------------------------------------------------------------
@@ -302,7 +311,13 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	}
 
 	if (! has_been_reset)
+	{
+		int potential_image_number = key - 'a';
+		if (potential_image_number >= 0 &&
+			potential_image_number < IMAGE_COUNT)
+			image_number = potential_image_number;
 		return;
+	}
 
 	if(key == 'r')
 	{

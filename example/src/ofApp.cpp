@@ -76,12 +76,12 @@ void ofApp::setup()
 	printf("%f %f\n", pw, ph);
 
 	controller1.add(mesh_);
-	controller1.enable();
+	// controller1.enable();
 	controller1.setElevationPixels(pix_);
 	controller1.setCenterOfProjection(IMAGE_SIZE_PIXEL * 0.5, IMAGE_SIZE_PIXEL * 0.5);
 
 	controller2.add(mesh_);
-	controller2.enable();
+	// controller2.enable();
 	controller2.setElevationPixels(pix_);
 	controller2.setCenterOfProjection(IMAGE_SIZE_PIXEL * 0.5, IMAGE_SIZE_PIXEL * 0.5);
 }

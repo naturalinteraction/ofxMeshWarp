@@ -176,7 +176,7 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
-	gradient.draw(IMAGE_SIZE_SCREEN * 0.25, IMAGE_SIZE_SCREEN * 9 / 16 * (1.0 - gradient_fract), IMAGE_SIZE_SCREEN * 0.50, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
+	gradient.draw(IMAGE_SIZE_SCREEN * 0.0, IMAGE_SIZE_SCREEN * 9 / 16 * (1.0 - gradient_fract), IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
 
     // this will be needed to show the second half of the projection
     viewport.x = IMAGE_SIZE_SCREEN;
@@ -195,7 +195,7 @@ void ofApp::draw()
 
 	ofPopView();
 
-	gradient_reversed.draw(IMAGE_SIZE_SCREEN * 1.25, 0, IMAGE_SIZE_SCREEN * 0.50, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
+	gradient_reversed.draw(IMAGE_SIZE_SCREEN * 1.0, 0, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
 
 	string s;
 

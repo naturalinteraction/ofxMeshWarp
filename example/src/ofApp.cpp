@@ -102,32 +102,23 @@ void ofApp::update()
 	if (should_reset)
 	{
 		should_reset = false;
-		say("initial save");
-		saveValues(controller1, "values1.xml");
-		saveValues(controller2, "values2.xml");
-		saveDaMesh();
-		say("done");
+		// saveValues(controller1, "values1.xml");
+		// saveValues(controller2, "values2.xml");
+		// saveDaMesh();
 	}
 	load_count--;
 	if (load_count == 0 && ! has_been_reset)
 	{
-		say("initial load #2");
-
 		loadValues(controller2, "values2.xml");
 		loadDaMesh(controller2);
 		controller2.elevationWarp(controller2.my_translation, controller2.my_scale, controller2.drama, controller2.my_rotation);
-
-		say("done");
 	}
 	if (should_load)
 	{
-		say("initial load");
 		should_load = false;
 
 		loadValues(controller1, "values1.xml");
 		controller1.elevationWarp(controller1.my_translation, controller1.my_scale, controller1.drama, controller1.my_rotation);
-
-		say("done");
 	}
 	mesh_->update();
 }
@@ -141,6 +132,8 @@ string ofApp::generateString(ofxMeshWarpController &controller_)
 	s += "r,f (gradient extension) " + to_string(gradient_fract) + "\n";
 	s += "arrows (translation) " + to_string(controller_.my_translation.x) + " " + to_string(controller_.my_translation.y) + "\n";
 	s += "S (save)\n";
+	s += "L (load display 1)\n";
+	s += "K (load display 2)\n";
 	s += "m (show/hide mesh)\nSPACE (next layer)\n";
 	s += "1 (load defaults for display 1)\n";
 	s += "2 (load defaults for display 2)\n";
@@ -363,7 +356,6 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 		loadDaMesh(controller1);
 		controller1.elevationWarp(controller1.my_translation, controller1.my_scale, controller1.drama, controller1.my_rotation);
 	}
-
 	// default values for display 2
 	if (key == '2')
 	{

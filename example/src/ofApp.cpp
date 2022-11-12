@@ -206,6 +206,16 @@ void ofApp::draw()
 	else
 		s = generateString(controller2);
 
+	ofSetColor(ofColor(0, 255, 0));
+
+	ofDrawLine(IMAGE_SIZE_SCREEN * 0.5, 0, IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16);
+	ofDrawLine(IMAGE_SIZE_SCREEN * 1.5, 0, IMAGE_SIZE_SCREEN * 1.5, IMAGE_SIZE_SCREEN * 9 / 16);
+
+	ofDrawLine(IMAGE_SIZE_SCREEN * 0, IMAGE_SIZE_SCREEN * 9 / 16 - 1, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16 - 1);
+	ofDrawLine(IMAGE_SIZE_SCREEN * 1.0, 0 + 1, IMAGE_SIZE_SCREEN * 2.0, 0 + 1);
+
+	ofSetColor(ofColor(255));
+
 	ofDrawBitmapStringHighlight(s, 0, 0);
 	ofDrawBitmapStringHighlight(s, IMAGE_SIZE_SCREEN, 0);
 	ofDrawBitmapStringHighlight(string("DEMO naturalinteract@gmail.com - this is DISPLAY 1"), IMAGE_SIZE_SCREEN * 0.5, IMAGE_SIZE_SCREEN * 9 / 16 * 0.5);

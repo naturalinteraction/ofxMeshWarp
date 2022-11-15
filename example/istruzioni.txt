@@ -1,3 +1,4 @@
+Mettere le immagini in bin/data/0.jpg, bin /data/1.jpg ... (fino al massimo a bin/data/19.jpg)
 Per impostare la trasformazione (SETUP MODE), lanciare "bin/plastico reset".
 La prima cosa da fissare e' il centro di proiezione (q,z) che e' indipendente dalle altre trasformazioni.
 Le rotazioni sono intese essere MINIME (1 grado, roba cosi').

@@ -144,7 +144,8 @@ string ofApp::generateString(ofxMeshWarpController &controller_)
 
 	if (! has_been_reset)
 	{
-		s = "\nPLAYBACK MODE\nm (show/hide mesh)\nSPACE (next layer)\n";
+		s = "\nPLAYBACK MODE\nm (show/hide mesh)\nSPACE (next image layer)\n";
+		s += "\na,b,c... (jump to image layer 0,1,2...)\n";
 		s += "fps " + to_string(ofGetFrameRate()) + "\n";
 		s += "naturalinteract@gmail.com";
 	}

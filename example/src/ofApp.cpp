@@ -361,6 +361,7 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	// default values for display 1
 	if (key == '1')
 	{
+		gradient_fract = 0.062999949;
 		controller1.my_scale = 0.0025;
 		controller1.setCenterOfProjection(controller1.center_of_projection.x, 3088);
 		controller1.my_translation.x = 3;
@@ -374,10 +375,11 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	// default values for display 2
 	if (key == '2')
 	{
-		controller2.my_scale = 0.0025;
+		gradient_fract = 0.062999949;
+		controller2.my_scale = 0.0025;  // 0.008
 		controller2.setCenterOfProjection(controller2.center_of_projection.x, 1058);
-		controller2.my_translation.x = 0;
-		controller2.my_translation.y = -408;
+		controller2.my_translation.x = 6;
+		controller2.my_translation.y = -426;
 		controller2.drama = 0.00004;
 		printf("cop %f %f\n", controller2.center_of_projection.x, controller2.center_of_projection.y);
 		printf("my_translation %f %f \n", controller2.my_translation.x, controller2.my_translation.y);

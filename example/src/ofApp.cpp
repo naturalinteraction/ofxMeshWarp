@@ -181,7 +181,7 @@ void ofApp::draw()
 	ofScale(1.0, 1.0, 1.0);
 	ofPopView();
 
-	mask1.draw(0, 0, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16);
+	// todo disabled mask1.draw(0, 0, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16);
 	gradient.draw(IMAGE_SIZE_SCREEN * 0.0, IMAGE_SIZE_SCREEN * 9 / 16 * (1.0 - gradient_fract), IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
 
     // this will be needed to show the second half of the projection
@@ -201,7 +201,7 @@ void ofApp::draw()
 
 	ofPopView();
 
-	mask2.draw(IMAGE_SIZE_SCREEN, 0, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16);
+	// todo disabled mask2.draw(IMAGE_SIZE_SCREEN, 0, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16);
 	gradient_reversed.draw(IMAGE_SIZE_SCREEN * 1.0, 0, IMAGE_SIZE_SCREEN * 1.0, IMAGE_SIZE_SCREEN * 9 / 16 * gradient_fract);
 
 	string s;

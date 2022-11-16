@@ -45,6 +45,6 @@ private:
 	bool has_been_reset;
 	int image_number = 0;
 	bool first_display = true;
-	ofImage gradient, gradient_reversed;
+	ofImage gradient, gradient_reversed, mask1, mask2;
 	float gradient_fract = 0.03;
 };

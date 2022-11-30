@@ -37,7 +37,7 @@ private:
 	ofxMeshWarpController controller1;
 	ofxMeshWarpController controller2;
 	vector <ofTexture *> tex_;
-	bool show_controller_interface = true;
+	bool show_controller_interface = false;
 
 	bool should_reset;
 	bool should_load;

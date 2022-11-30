@@ -368,12 +368,13 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	// default values for display 1
 	if (key == '1')
 	{
-		gradient_fract = 0.062999949;
-		controller1.my_scale = 0.0025;
-		controller1.setCenterOfProjection(controller1.center_of_projection.x, 3088);
-		controller1.my_translation.x = 3;
-		controller1.my_translation.y = 552;
-		controller1.drama = 0.00004;
+		controller1.my_rotation = 0.0;
+		gradient_fract = 0.056999959;
+		controller1.my_scale = 0.004000000;
+		controller1.setCenterOfProjection(controller1.center_of_projection.x, 2970);
+		controller1.my_translation.x = 12.000000000;
+		controller1.my_translation.y = 454.000000000;
+		controller1.drama = 0.000040000;
 		printf("cop %f %f\n", controller1.center_of_projection.x, controller1.center_of_projection.y);
 		printf("my_translation %f %f \n", controller1.my_translation.x, controller1.my_translation.y);
 		loadDaMesh(controller1);
@@ -382,12 +383,13 @@ void ofApp::keyPressedForController(int key, ofxMeshWarpController &controller_)
 	// default values for display 2
 	if (key == '2')
 	{
-		gradient_fract = 0.062999949;
-		controller2.my_scale = 0.0025;  // 0.008
-		controller2.setCenterOfProjection(controller2.center_of_projection.x, 1058);
-		controller2.my_translation.x = 6;
-		controller2.my_translation.y = -426;
-		controller2.drama = 0.00004;
+		controller2.my_rotation = -0.340000033;
+		gradient_fract = 0.056999959;
+		controller2.my_scale = 0.008500000;
+		controller2.setCenterOfProjection(controller2.center_of_projection.x, 870.0);
+		controller2.my_translation.x = 14.000000000;
+		controller2.my_translation.y = -524.000000000;
+		controller2.drama = 0.000035000;
 		printf("cop %f %f\n", controller2.center_of_projection.x, controller2.center_of_projection.y);
 		printf("my_translation %f %f \n", controller2.my_translation.x, controller2.my_translation.y);
 		loadDaMesh(controller2);

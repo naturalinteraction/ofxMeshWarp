@@ -1,0 +1,26 @@
+pc@pc-MS-7D22:~/poll/bin/data$ cat values1.xml 
+
+
+<gradient_fract>0.056999959</gradient_fract>
+<my_translation_x>12.000000000</my_translation_x>
+<my_translation_y>454.000000000</my_translation_y>
+<drama>0.000040000</drama>
+<my_scale>0.004000000</my_scale>
+<rotation>0.000000000</rotation>
+<x_scale>1.000000000</x_scale>
+<center_of_projection_x>2048.000000000</center_of_projection_x>
+<center_of_projection_y>2970.000000000</center_of_projection_y>
+
+
+pc@pc-MS-7D22:~/poll/bin/data$ cat values2.xml 
+
+
+<gradient_fract>0.056999959</gradient_fract>
+<my_translation_x>14.000000000</my_translation_x>
+<my_translation_y>-524.000000000</my_translation_y>
+<drama>0.000035000</drama>
+<my_scale>0.008500000</my_scale>
+<rotation>-0.340000033</rotation>
+<x_scale>1.000000000</x_scale>
+<center_of_projection_x>2048.000000000</center_of_projection_x>
+<center_of_projection_y>870.000000000</center_of_projection_y>
